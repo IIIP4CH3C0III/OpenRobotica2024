@@ -1,5 +1,6 @@
-MODULE Menu    
-    ! ====================== Definition of variables/constants =============================== !
+MODULE Menu
+    
+    ! ============== Definition of variables/constants =============================== !
     
     ! Questions suport
     VAR num answerInitMenu;
@@ -17,73 +18,57 @@ MODULE Menu
     CONST num a5Lenght := 148; 
     CONST num a5Width := 210;
 
-    ! Define the structure for paper characteristics
-    STRUCT PaperCharacteristics
-        string Size := "A4";
-        string Orientation := "Horizontal";
-        string Alignment := "Left";
-        num TopMargin := 20;
-        num BottomMargin := 20;
-        num LeftMargin := 10;
-        num RightMargin := 10;
-        num Width := a4Width;
-        num Length := a4Length;
-    ENDSTRUCT
-
-    ! Declare a variable of type PaperCharacteristics
-    VAR PaperCharacteristics paper;
-
     ! Initialize the paper characteristics
-    paper.Size := "A4";
-    paper.Orientation := "Horizontal";
-    paper.Alignment := "Esquerda";
-    paper.TopMargin := 20;
-    paper.BottomMargin := 20;
-    paper.LeftMargin := 10;
-    paper.RightMargin := 10;
-    paper.Width := a4Width;
-    paper.Length := a4Length; 
+    VAR string paper_size := "A4";
+    VAR string paper_orientation := "Horizontal";
+    VAR string paper_alignment := "Esquerda";
+    VAR num paper_TopMargin := 20;
+    VAR num paper_BottomMargin := 20;
+    VAR num paper_LeftMargin := 10;
+    VAR num paper_RightMargin := 10;
+    VAR num paper_Width ;
+    VAR num paper_Length; 
     
-    ! ========================== Code ============================= !
+    VAR string help_print;
+
     
-    ! Process for the inicialization program
-    PROC startDefault( )        
+     ! Process for the inicialization program
+    PROC startDefault( ) 
+        
+        paper_Width := a4Width;
+        paper_Length := a4Lenght;
         ! Clear console
         TPErase;         
 
         ! JumpHome; !TODO
-        TPWrite "O robot estÃ¡ pronto a ser operado.";
+        TPWrite "O robot está pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
 
     ! ==================== Code - mainMenu ======================== !
     
-    PROC mainMenu( )
-        ! Clear console
-        TPErase;         
+    PROC mainMenu()
+        !Clear console
+        TPErase; 
         
         ! Welcome page.
-        !TPWrite "Plotter & Open RobÃ³tica";
+        TPWrite "Plotter & Open Robótica";
         
         ! Options of the menu
-        TPReadFK answerInitMenu ,                                    ! Where is stored the option
-                 "Plotter & Open RobÃ³tica" ,                         ! What it writes on the screen
-                 "Escrever Manualmente" ,                            ! Option 1
-                 "DefiniÃ§Ãµes texto" ,                                ! Option 2
-                 "DefiniÃ§Ãµes folha" ,                                ! Option 3 
-                 "Imprimir",                                         ! Option 4
-                 "Debug";                                            ! Option 5 
-
+        TPReadFK answerInitMenu ,"Plotter & Open Robótica" , "Escrever Manualmente" , "Definições texto" , "Definições folha" ,  "Imprimir",  "Debug";                                                                                            
+! Where is stored the option  ! What it writes on the screen    ! Option 1               ! Option 2        ! Option 3           ! Option 4      ! Option 5 
+                 
             IF 1 = answerInitMenu THEN  
-                writeTextMenu ;
+                writeTextMenu;
                 
+            !                               
             ELSEIF 2 = answerInitMenu THEN                                                        
-                settingsTextMenu ;   
+               settingsTextMenu ;
                 
+            !    
             ELSEIF 3 = answerInitMenu THEN
                 settingsPageMenu ;
-                
             ELSEIF 4 = answerInitMenu THEN
                 printingPageMenu ;                 
 
@@ -113,7 +98,6 @@ MODULE Menu
     ENDPROC
 
     ! ==================== Code - settingsPage ==================== !
-    
     PROC settingsPageMenu( )
         WHILE 0 <> answerPaperMenu DO
             ! Clear the console
@@ -125,7 +109,7 @@ MODULE Menu
             TPReadFK answerPaperMenu, 
                      stEmpty , 
                      "Formato", 
-                     "OrientaÃ§Ã£o", 
+                     "Orientação", 
                      "Margens", 
                      "Alinhamento", 
                      "Voltar";
@@ -134,13 +118,13 @@ MODULE Menu
                 formatPageMenu ;
                 
             ELSEIF 2 = answerPaperMenu THEN                                                        
-                orientationPageMenu ;   
+                orientationPageMenu;   
                 
             ELSEIF 3 = answerPaperMenu THEN
                 marginsPageMenu ;
                 
             ELSEIF 4 = answerPaperMenu THEN
-                algnmentPageMenu ;                 
+                alignmentPageMenu ;                 
 
             ELSEIF 5 = answerPaperMenu THEN
                 answerPaperMenu := 0 ;
@@ -149,19 +133,21 @@ MODULE Menu
     ENDPROC
 
     PROC tpWriteReportSettingsPageMenu( )
-        TPWrite("DefiniÃ§Ãµes de pÃ¡gina:");
-
+        TPWrite("Definições de página:");
+        
+        
         ! Display paper size
-        TPWrite("Formato da folha: " + paper.Size + " (" + NumToStr( paper.Width ) + " mm, " + NumToStr( paper.Length ) + " mm)");
+        
+        TPWrite "Formato da folha: " + paper_size + " (" +  NumToStr(paper_Width,3) + " mm, " +  NumToStr(paper_Length,3) + " mm)";
 
         ! Display paper orientation
-        TPWrite("OrientaÃ§Ã£o da folha: " + paper.Orientation );
+        TPWrite "Orientação da folha: " + paper_Orientation;
 
         ! Display paper margins
-        TPWrite("Margens da folha: " + NumToStr( paper.TopMargin ) + " (cabeÃ§alho), " + NumToStr( paper.BottomMargin ) + " (rodapÃ©), " + NumToStr( paper.LeftMargin ) + " (esquerda), " + NumToStr( paper.RightMargin ) + " (direita)");
+        TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 3 ) + " (cabeçalho), " + NumToStr( paper_BottomMargin ,3 ) + " (rodapé), " + NumToStr( paper_LeftMargin, 3 ) + " (esquerda), " + NumToStr( paper_RightMargin ,3 ) + " (direita)";
 
         ! Display text alignment
-        TPWrite("Alinhamento do texto: " + paper.Alignment );
+        TPWrite("Alinhamento do texto: " + paper_Alignment );
     ENDPROC
 
     PROC formatPageMenu( )
@@ -175,20 +161,20 @@ MODULE Menu
                  "Voltar" ;
 
         IF 1 = answerPaperMenu2 THEN  
-            paper.Size := "A3" ;
-            paper.Width := a3Width;
-            paper.Length := a3Length; 
-            
+            paper_size := "A3" ;
+            paper_Width := a3Width;
+            paper_Length := a3Lenght;
+        
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            paper.Size := "A4" ;
-            paper.Width := a4Width;
-            paper.Length := a4Length; 
+            paper_size := "A4" ;
+            paper_Width := a4Width;
+            paper_Length := a4Lenght; 
             
         ELSEIF 3 = answerPaperMenu2 THEN
-            paper.Size := "A5" ;
-            paper.Width := a5Width;
-            paper.Length := a5Length; 
-            
+            paper_size := "A5" ;
+            paper_Width := a5Width;
+            paper_Length := a5Lenght;
+        
         ELSEIF 4 = answerPaperMenu2 THEN
             ! nothing for now
             
@@ -208,10 +194,10 @@ MODULE Menu
                  "Voltar" ;
 
         IF 1 = answerPaperMenu2 THEN  
-            paper.Orientation := "Horizontal";
+            paper_Orientation := "Horizontal";
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            paper.Orientation := "Vertical";
+            paper_Orientation := "Vertical";
             
         ELSEIF 3 = answerPaperMenu2 THEN
             ! nothing for now
@@ -228,8 +214,8 @@ MODULE Menu
         ! Options to change orientation
         TPReadFK answerPaperMenu2, 
                  stEmpty , 
-                 "CabeÃ§alho" , 
-                 "RodapÃ©" , 
+                 "Cabeçalho" , 
+                 "Rodapé" , 
                  "Esquerda" , 
                  "Direita" , 
                  "Voltar" ;
@@ -237,23 +223,23 @@ MODULE Menu
         ! TODO does nothing at the moment 
         
         IF 1 = answerPaperMenu2 THEN  
-            paper.TopMargin := 20;
+            paper_TopMargin := 20;
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            paper.BottomMargin := 20;
+            paper_BottomMargin := 20;
             
         ELSEIF 3 = answerPaperMenu2 THEN
-            paper.LeftMargin := 10;
+            paper_LeftMargin := 10;
             
         ELSEIF 4 = answerPaperMenu2 THEN
-            paper.RightMargin := 10;
+            paper_RightMargin := 10;
             
         ELSEIF 5 = answerPaperMenu2 THEN
             answerPaperMenu2 := 0 ;
         ENDIF                             
     ENDPROC
 
-    PROC orientationPageMenu( )
+    PROC alignmentPageMenu( )
         ! Options to change orientation
         TPReadFK answerPaperMenu2, 
                  stEmpty , 
@@ -264,16 +250,16 @@ MODULE Menu
                  "Voltar" ;
 
         IF 1 = answerPaperMenu2 THEN  
-            paper.Alignment := "Centro";
+            paper_Alignment := "Centro";
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            paper.Alignment := "Esquerda";
+            paper_Alignment := "Esquerda";
             
         ELSEIF 3 = answerPaperMenu2 THEN
-            paper.Alignment := "Direita";
+            paper_Alignment := "Direita";
            
         ELSEIF 4 = answerPaperMenu2 THEN
-            paper.Alignment := "Justificado";
+            paper_Alignment := "Justificado";
             
         ELSEIF 5 = answerPaperMenu2 THEN
             answerPaperMenu2 := 0 ;
@@ -290,6 +276,7 @@ MODULE Menu
         ENDWHILE        
     ENDPROC
 
+
     ! ==================== Code - debugMenu ==================== !
 
     PROC debugMenu( )
@@ -299,5 +286,6 @@ MODULE Menu
 
         ENDWHILE        
     ENDPROC
+    
     
 ENDMODULE

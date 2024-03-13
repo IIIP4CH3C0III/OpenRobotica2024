@@ -1,17 +1,13 @@
 MODULE Math
-    ! ============== Declaraï¿½ï¿½o de Variaveis =======================
+    ! ============== Declaração de Variaveis =======================
     
     ! Apoio para as perguntas
     VAR num answer_impress;
-    
-    !Tamanho papel
-    PERS num lenght_paper; !Comprimento Posiï¿½ï¿½o folha
-    PERS num widht_paper;   
-    
+   
     !Write array
     PERS string char_impress;
     
-    !================ Menu de Impressï¿½o ============================
+    !================ Menu de Impressão ============================
     PROC impressmenu()
         
         !Frase a escrever
@@ -23,11 +19,11 @@ MODULE Math
             !Relatorio
             
             !Escolha de Menu
-            TPReadFK answer_impress, "Que passo quer efetuar?" , "Definiï¿½ï¿½es Texto", "Definiï¿½ï¿½o Papel", "Reescrever Frase", "IMPRIMIR", "Voltar";
+            TPReadFK answer_impress, "Que passo quer efetuar?" , "Definições Texto", "Definição Papel", "Reescrever Frase", "IMPRIMIR", "Voltar";
             IF answer_impress = 1 THEN
-                menu_text;
+                settingsTextMenu;
             ELSEIF answer_impress = 2 THEN
-                menu_paper;
+                settingsPageMenu;
             ELSEIF answer_impress = 3 THEN
                 write_string;
             ELSEIF answer_impress = 4 THEN
@@ -45,40 +41,41 @@ MODULE Math
     PROC write_string()
         TPWrite "Insira a Frase pretendida para escrever";
         char_impress := UIAlphaEntry(
-            \Header:= "Impressï¿½o",
-            \Message:= "Escreva qual ï¿½ a mensagem a escrever?"
+            \Header:= "Impressão",
+            \Message:= "Escreva qual é a mensagem a escrever?"
             \Icon:=iconInfo
             \InitString:= "OPEN ROBOTICA");
     ENDPROC
     
     PROC calculo_size()
         !Tamanho da folha
-        IF orientation = TRUE THEN  !Se True, orientaï¿½ï¿½o Vertical 
-            IF paper_use = 3 THEN
-               lenght_paper := a3_lenght;
-               widht_paper  := a3_width;
-            ELSEIF paper_use = 4 THEN
-                lenght_paper := a4_lenght;
-                widht_paper  := a4_width;
-            ELSEIF paper_use = 5 THEN
-                lenght_paper := a5_lenght;
-                widht_paper  := a5_width;
+        IF paper_orientation = "Horizontal" THEN 
+            IF paper_size = "A3" THEN
+               paper_Length := a3lenght;
+               paper_Width  := a3width;
+            ELSEIF paper_size = "A4" THEN
+                paper_Length := a4lenght;
+                paper_Width  := a4width;
+            ELSEIF paper_size = "A5" THEN
+                paper_Length := a5lenght;
+                paper_Width  := a5width;
             ELSE
             ENDIF
             
-        ELSE                                !Orientaï¿½ï¿½o Horizontal
-            IF paper_use = 3 THEN
-               lenght_paper := a3_width;
-               widht_paper  := a3_lenght;
-            ELSEIF paper_use = 4 THEN
-                lenght_paper := a4_width;
-                widht_paper  := a4_lenght;
-            ELSEIF paper_use = 5 THEN
-                lenght_paper := a5_width;
-                widht_paper  := a5_lenght;
+        ELSE                                !Orientação Horizontal
+            IF paper_size = "A3" THEN
+               paper_Length := a3width;
+               paper_Width  := a3lenght;
+            ELSEIF paper_size = "A4" THEN
+                paper_Length := a4width;
+                paper_Width  := a4lenght;
+            ELSEIF paper_size = "A5" THEN
+                paper_Length := a5width;
+                paper_Width  := a5lenght;
             ELSE
             ENDIF  
         ENDIF
+        
         
         !Calculo de caracteres
         

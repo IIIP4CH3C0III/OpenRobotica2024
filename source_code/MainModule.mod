@@ -1,11 +1,13 @@
 MODULE MainModule
+    
     PROC main()
-       ! Sends the robot to the home position
+        !Arranque do Robo
        startDefault;
        
-       ! Main loop of the program
+       !Fica em loop
         WHILE TRUE DO
             mainMenu;    
         ENDWHILE
+           
     ENDPROC
 ENDMODULE
