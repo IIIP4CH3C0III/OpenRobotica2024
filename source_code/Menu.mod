@@ -1,121 +1,303 @@
-MODULE Menu
+MODULE Menu    
+    ! ====================== Definition of variables/constants =============================== !
     
-    ! ============== Declaração de Variaveis =======================
+    ! Questions suport
+    VAR num answerInitMenu;
+    VAR num answerPaperMenu;
+    VAR num answerPaperMenu2;
+
+    ! Variable that stores the text input
+    VAR string userInputText ; 
+
+    ! Dimensions of the format papers (mm)
+    CONST num a3Lenght := 297; 
+    CONST num a3Width := 420;
+    CONST num a4Lenght := 210; 
+    CONST num a4Width := 297;
+    CONST num a5Lenght := 148; 
+    CONST num a5Width := 210;
+
+    ! Define the structure for paper characteristics
+    STRUCT PaperCharacteristics
+        string Size := "A4";
+        string Orientation := "Horizontal";
+        string Alignment := "Left";
+        num TopMargin := 20;
+        num BottomMargin := 20;
+        num LeftMargin := 10;
+        num RightMargin := 10;
+        num Width := a4Width;
+        num Length := a4Length;
+    ENDSTRUCT
+
+    ! Declare a variable of type PaperCharacteristics
+    VAR PaperCharacteristics paper;
+
+    ! Initialize the paper characteristics
+    paper.Size := "A4";
+    paper.Orientation := "Horizontal";
+    paper.Alignment := "Esquerda";
+    paper.TopMargin := 20;
+    paper.BottomMargin := 20;
+    paper.LeftMargin := 10;
+    paper.RightMargin := 10;
+    paper.Width := a4Width;
+    paper.Length := a4Length; 
     
-    ! Apoio para as perguntas
-    VAR num answer_menu_inicial;
-    VAR num answer_menu_paper;
-    VAR num answer_trade_paper;
+    ! ========================== Code ============================= !
     
-    ! Variaveis sobre impressao
-    PERS bool automatic := FALSE; !Se True, é automatico
-    
-    ! Orientation
-    PERS bool orientation := TRUE; !Se True, orientação Vertical 
-    
-    ! Paper
-    PERS num paper_use := 4; ! 3 = A3  /   4 = A4   /  5 = A5
-    
-    !Dimension Paper (mm)
-    CONST num a3_lenght := 297; 
-    CONST num a3_width := 420;
-    
-    CONST num a4_lenght := 210; 
-    CONST num a4_width := 297;
-    
-    CONST num a5_lenght := 148; 
-    CONST num a5_width := 210;
-    
-    ! =============== program =======================================
-    
-    !Process for the inicialization program
-    PROC start_default()
-        
-        TPWrite "As configurações default foram efetuadas!";
-        WaitTime(3);
+    ! Process for the inicialization program
+    PROC startDefault( )        
+        ! Clear console
+        TPErase;         
+
+        ! JumpHome; !TODO
+        TPWrite "O robot estÃ¡ pronto a ser operado.";
+ 
+        WaitTime(1);
     ENDPROC
+
+    ! ==================== Code - mainMenu ======================== !
     
-    PROC principal_menu()
-        TPErase; !Clear console
+    PROC mainMenu( )
+        ! Clear console
+        TPErase;         
         
-        !Imprimir Alguma coisa da consola
-        TPWrite "Plotter & Open Robótica";
+        ! Welcome page.
+        !TPWrite "Plotter & Open RobÃ³tica";
         
-        !Perguntar o Menu que deseja fazer
-        TPReadFK answer_menu_inicial, "Menu Principal" , "Definições Texto", "Definição Papel", "Imprimir uma Frase", stEmpty, stEmpty;
-            !
-            IF answer_menu_inicial = 1 THEN  
-                menu_text;
+        ! Options of the menu
+        TPReadFK answerInitMenu ,                                    ! Where is stored the option
+                 "Plotter & Open RobÃ³tica" ,                         ! What it writes on the screen
+                 "Escrever Manualmente" ,                            ! Option 1
+                 "DefiniÃ§Ãµes texto" ,                                ! Option 2
+                 "DefiniÃ§Ãµes folha" ,                                ! Option 3 
+                 "Imprimir",                                         ! Option 4
+                 "Debug";                                            ! Option 5 
+
+            IF 1 = answerInitMenu THEN  
+                writeTextMenu ;
                 
-            !                               
-            ELSEIF answer_menu_inicial = 2 THEN                                                        
-               menu_paper;
+            ELSEIF 2 = answerInitMenu THEN                                                        
+                settingsTextMenu ;   
                 
-            !    
-            ELSEIF answer_menu_inicial = 3 THEN
-                impressmenu;
+            ELSEIF 3 = answerInitMenu THEN
+                settingsPageMenu ;
                 
-            !Nenhuma informação
-            ELSE 
+            ELSEIF 4 = answerInitMenu THEN
+                printingPageMenu ;                 
+
+            ELSEIF 5 = answerInitMenu THEN
+                debugMenu ;
             ENDIF      
     ENDPROC
+
+    ! ==================== Code - writeMenu ======================= !
     
-    PROC menu_text()
-        TPErase;
-        
-        TPWrite ""; !Informação relevante
-        
-    ENDPROC
-    
-    PROC menu_paper()
-        WHILE answer_menu_paper <> 5 DO
-                
+    PROC writeTextMenu( )
+        WHILE 5 <> answerPaperMenu DO
+            ! Clear the console
             TPErase;
-            
-            !Orientação da Folha
-            IF orientation = TRUE THEN
-               TPWrite "Orientação da folha = Vertical"; 
-            ELSE
-               TPWrite "Orientação da folha = Horizontal"; 
-            ENDIF
-            
-            !Tamanho do Papel
-            IF paper_use = 3 THEN
-                TPWrite "Papel a ser usado = A3";
-            ELSEIF paper_use = 4 THEN
-                TPWrite "Papel a ser usado = A4";
-            ELSEIF paper_use = 5 THEN
-                TPWrite "Papel a ser usado = A5";
-            ELSE
-            ENDIF
-            
-            !Escolhas a ser efetuadas
-            TPReadFK answer_menu_paper, "Se pretende mudar alguma configuração, basta clicar no botão" , "Orientação", "Papel a usar", stEmpty, stEmpty, "Voltar";
-            !Trocar Orientação
-            IF answer_menu_paper = 1 THEN
-                IF orientation = TRUE THEN
-                    orientation := FALSE;
-                ELSE
-                    orientation := TRUE;
-                ENDIF 
-            
-            !Trocar Tamanho 
-            ELSEIF answer_menu_paper = 2 THEN
-                TPReadFK answer_trade_paper, "Qual é o tamanho pretendido" , "A3", "A4", "A5", stEmpty, stEmpty;
-                IF answer_trade_paper = 1 THEN
-                    paper_use := 3;
-                ELSEIF answer_trade_paper = 2 THEN
-                    paper_use := 4;
-                ELSEIF answer_trade_paper = 3 THEN
-                    paper_use := 5;
-                ELSE
-                ENDIF
-            !Outras opçoes
-            ELSE
-            ENDIF
-         ENDWHILE
-         
-         answer_menu_paper := 0; !Evitar que na proxima entre
-        
+
+        ENDWHILE        
     ENDPROC
+
+    ! ==================== Code - settingsText ==================== !
+
+    PROC settingsTextMenu( )
+        WHILE 5 <> answerPaperMenu DO
+            ! Clear the console
+            TPErase;
+
+        ENDWHILE        
+    ENDPROC
+
+    ! ==================== Code - settingsPage ==================== !
+    
+    PROC settingsPageMenu( )
+        WHILE 5 <> answerPaperMenu DO
+            ! Clear the console
+            TPErase;
+
+            tpWriteReportSettingsPageMenu ;
+                                    
+            ! Options to change settings of the page
+            TPReadFK answerPaperMenu, 
+                     stEmpty , 
+                     "Formato", 
+                     "OrientaÃ§Ã£o", 
+                     "Margens", 
+                     "Alinhamento", 
+                     "Voltar";
+
+            IF 1 = answerPaperMenu THEN  
+                formatPageMenu ;
+                
+            ELSEIF 2 = answerPaperMenu THEN                                                        
+                orientationPageMenu ;   
+                
+            ELSEIF 3 = answerPaperMenu THEN
+                marginsPageMenu ;
+                
+            ELSEIF 4 = answerPaperMenu THEN
+                algnmentPageMenu ;                 
+
+            ELSEIF 5 = answerPaperMenu THEN
+                answerPaperMenu := 0 ;
+            ENDIF                             
+        ENDWHILE        
+    ENDPROC
+
+    PROC tpWriteReportSettingsPageMenu( )
+        TPWrite("DefiniÃ§Ãµes de pÃ¡gina:");
+
+        ! Display paper size
+        TPWrite("Formato da folha: " + paper.Size + " (" + NumToStr( paper.Width ) + " mm, " + NumToStr( paper.Length ) + " mm)");
+
+        ! Display paper orientation
+        TPWrite("OrientaÃ§Ã£o da folha: " + paper.Orientation );
+
+        ! Display paper margins
+        TPWrite("Margens da folha: " + NumToStr( paper.TopMargin ) + " (cabeÃ§alho), " + NumToStr( paper.BottomMargin ) + " (rodapÃ©), " + NumToStr( paper.LeftMargin ) + " (esquerda), " + NumToStr( paper.RightMargin ) + " (direita)");
+
+        ! Display text alignment
+        TPWrite("Alinhamento do texto: " + paper.Alignment );
+    ENDPROC
+
+    PROC formatPageMenu( )
+        ! Options to change format
+        TPReadFK answerPaperMenu2, 
+                 stEmpty , 
+                 "A3" , 
+                 "A4" , 
+                 "A5" , 
+                 "Outro" , 
+                 "Voltar" ;
+
+        IF 1 = answerPaperMenu2 THEN  
+            paper.Size := "A3" ;
+            paper.Width := a3Width;
+            paper.Length := a3Length; 
+            
+        ELSEIF 2 = answerPaperMenu2 THEN                                                        
+            paper.Size := "A4" ;
+            paper.Width := a4Width;
+            paper.Length := a4Length; 
+            
+        ELSEIF 3 = answerPaperMenu2 THEN
+            paper.Size := "A5" ;
+            paper.Width := a5Width;
+            paper.Length := a5Length; 
+            
+        ELSEIF 4 = answerPaperMenu2 THEN
+            ! nothing for now
+            
+        ELSEIF 5 = answerPaperMenu2 THEN
+            answerPaperMenu2 := 0 ;
+        ENDIF                             
+    ENDPROC
+
+    PROC orientationPageMenu( )
+        ! Options to change orientation
+        TPReadFK answerPaperMenu2, 
+                 stEmpty , 
+                 "Horizontal" , 
+                 "Vertical" , 
+                 stEmpty , 
+                 stEmpty , 
+                 "Voltar" ;
+
+        IF 1 = answerPaperMenu2 THEN  
+            paper.Orientation := "Horizontal";
+            
+        ELSEIF 2 = answerPaperMenu2 THEN                                                        
+            paper.Orientation := "Vertical";
+            
+        ELSEIF 3 = answerPaperMenu2 THEN
+            ! nothing for now
+            
+        ELSEIF 4 = answerPaperMenu2 THEN
+            ! nothing for now
+            
+        ELSEIF 5 = answerPaperMenu2 THEN
+            answerPaperMenu2 := 0 ;
+        ENDIF                             
+    ENDPROC
+
+    PROC marginsPageMenu( )
+        ! Options to change orientation
+        TPReadFK answerPaperMenu2, 
+                 stEmpty , 
+                 "CabeÃ§alho" , 
+                 "RodapÃ©" , 
+                 "Esquerda" , 
+                 "Direita" , 
+                 "Voltar" ;
+
+        ! TODO does nothing at the moment 
+        
+        IF 1 = answerPaperMenu2 THEN  
+            paper.TopMargin := 20;
+            
+        ELSEIF 2 = answerPaperMenu2 THEN                                                        
+            paper.BottomMargin := 20;
+            
+        ELSEIF 3 = answerPaperMenu2 THEN
+            paper.LeftMargin := 10;
+            
+        ELSEIF 4 = answerPaperMenu2 THEN
+            paper.RightMargin := 10;
+            
+        ELSEIF 5 = answerPaperMenu2 THEN
+            answerPaperMenu2 := 0 ;
+        ENDIF                             
+    ENDPROC
+
+    PROC orientationPageMenu( )
+        ! Options to change orientation
+        TPReadFK answerPaperMenu2, 
+                 stEmpty , 
+                 "Centro" , 
+                 "Esquerda" , 
+                 "Direita" , 
+                 "Justificado" , 
+                 "Voltar" ;
+
+        IF 1 = answerPaperMenu2 THEN  
+            paper.Alignment := "Centro";
+            
+        ELSEIF 2 = answerPaperMenu2 THEN                                                        
+            paper.Alignment := "Esquerda";
+            
+        ELSEIF 3 = answerPaperMenu2 THEN
+            paper.Alignment := "Direita";
+           
+        ELSEIF 4 = answerPaperMenu2 THEN
+            paper.Alignment := "Justificado";
+            
+        ELSEIF 5 = answerPaperMenu2 THEN
+            answerPaperMenu2 := 0 ;
+        ENDIF                             
+    ENDPROC
+
+    ! ==================== Code - printingMenu ==================== !
+
+    PROC printingPageMenu( )
+        WHILE 5 <> answerPaperMenu DO
+            ! Clear the console
+            TPErase;
+
+        ENDWHILE        
+    ENDPROC
+
+    ! ==================== Code - debugMenu ==================== !
+
+    PROC debugMenu( )
+        WHILE 5 <> answerPaperMenu DO
+            ! Clear the console
+            TPErase;
+
+        ENDWHILE        
+    ENDPROC
+    
 ENDMODULE

@@ -1,17 +1,17 @@
-MODULE ImpressModule
-    ! ============== Declaração de Variaveis =======================
+MODULE Math
+    ! ============== Declaraï¿½ï¿½o de Variaveis =======================
     
     ! Apoio para as perguntas
     VAR num answer_impress;
     
     !Tamanho papel
-    PERS num lenght_paper; !Comprimento Posição folha
+    PERS num lenght_paper; !Comprimento Posiï¿½ï¿½o folha
     PERS num widht_paper;   
     
     !Write array
     PERS string char_impress;
     
-    !================ Menu de Impressão ============================
+    !================ Menu de Impressï¿½o ============================
     PROC impressmenu()
         
         !Frase a escrever
@@ -23,7 +23,7 @@ MODULE ImpressModule
             !Relatorio
             
             !Escolha de Menu
-            TPReadFK answer_impress, "Que passo quer efetuar?" , "Definições Texto", "Definição Papel", "Reescrever Frase", "IMPRIMIR", "Voltar";
+            TPReadFK answer_impress, "Que passo quer efetuar?" , "Definiï¿½ï¿½es Texto", "Definiï¿½ï¿½o Papel", "Reescrever Frase", "IMPRIMIR", "Voltar";
             IF answer_impress = 1 THEN
                 menu_text;
             ELSEIF answer_impress = 2 THEN
@@ -45,15 +45,15 @@ MODULE ImpressModule
     PROC write_string()
         TPWrite "Insira a Frase pretendida para escrever";
         char_impress := UIAlphaEntry(
-            \Header:= "Impressão",
-            \Message:= "Escreva qual é a mensagem a escrever?"
+            \Header:= "Impressï¿½o",
+            \Message:= "Escreva qual ï¿½ a mensagem a escrever?"
             \Icon:=iconInfo
             \InitString:= "OPEN ROBOTICA");
     ENDPROC
     
     PROC calculo_size()
         !Tamanho da folha
-        IF orientation = TRUE THEN  !Se True, orientação Vertical 
+        IF orientation = TRUE THEN  !Se True, orientaï¿½ï¿½o Vertical 
             IF paper_use = 3 THEN
                lenght_paper := a3_lenght;
                widht_paper  := a3_width;
@@ -66,7 +66,7 @@ MODULE ImpressModule
             ELSE
             ENDIF
             
-        ELSE                                !Orientação Horizontal
+        ELSE                                !Orientaï¿½ï¿½o Horizontal
             IF paper_use = 3 THEN
                lenght_paper := a3_width;
                widht_paper  := a3_lenght;
