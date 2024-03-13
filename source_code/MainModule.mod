@@ -1,10 +1,10 @@
 MODULE MainModule
     
     PROC main()
-        !Arranque do Robo
+       ! Default sequence to reposition the robot
        startDefault;
        
-       !Fica em loop
+       ! Main loop
         WHILE TRUE DO
             mainMenu;    
         ENDWHILE

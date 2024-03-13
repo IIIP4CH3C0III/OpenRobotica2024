@@ -26,22 +26,21 @@ MODULE Menu
     VAR num paper_BottomMargin := 20;
     VAR num paper_LeftMargin := 10;
     VAR num paper_RightMargin := 10;
-    VAR num paper_Width ;
-    VAR num paper_Length; 
+    VAR num paper_Width := a4Width;
+    VAR num paper_Length := a4Lenght; 
     
-    VAR string help_print;
+    VAR string userInput;
 
-    
-     ! Process for the inicialization program
+
+    ! ==================== Code - default ========================= !
+
+    ! Process for the inicialization program
     PROC startDefault( ) 
-        
-        paper_Width := a4Width;
-        paper_Length := a4Lenght;
         ! Clear console
         TPErase;         
 
         ! JumpHome; !TODO
-        TPWrite "O robot está pronto a ser operado.";
+        TPWrite "O robot estÃ¡ pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
@@ -53,28 +52,22 @@ MODULE Menu
         TPErase; 
         
         ! Welcome page.
-        TPWrite "Plotter & Open Robótica";
+        TPWrite "Plotter & Open Robï¿½tica";
         
         ! Options of the menu
-        TPReadFK answerInitMenu ,"Plotter & Open Robótica" , "Escrever Manualmente" , "Definições texto" , "Definições folha" ,  "Imprimir",  "Debug";                                                                                            
-! Where is stored the option  ! What it writes on the screen    ! Option 1               ! Option 2        ! Option 3           ! Option 4      ! Option 5 
+        TPReadFK answerInitMenu ,"Plotter & Open RobÃ³tica" , "Escrever Manualmente" , "DefiniÃ§Ãµes texto" , "DefiniÃ§Ãµes folha" ,  "Imprimir",  "Debug";                                                                                            
                  
-            IF 1 = answerInitMenu THEN  
-                writeTextMenu;
-                
-            !                               
-            ELSEIF 2 = answerInitMenu THEN                                                        
-               settingsTextMenu ;
-                
-            !    
-            ELSEIF 3 = answerInitMenu THEN
-                settingsPageMenu ;
-            ELSEIF 4 = answerInitMenu THEN
-                printingPageMenu ;                 
-
-            ELSEIF 5 = answerInitMenu THEN
-                debugMenu ;
-            ENDIF      
+        IF 1 = answerInitMenu THEN  
+            writeTextMenu;
+        ELSEIF 2 = answerInitMenu THEN                                                        
+           settingsTextMenu ;
+        ELSEIF 3 = answerInitMenu THEN
+            settingsPageMenu ;
+        ELSEIF 4 = answerInitMenu THEN
+            printingPageMenu ;                 
+        ELSEIF 5 = answerInitMenu THEN
+            debugMenu ;
+        ENDIF      
     ENDPROC
 
     ! ==================== Code - writeMenu ======================= !
@@ -109,7 +102,7 @@ MODULE Menu
             TPReadFK answerPaperMenu, 
                      stEmpty , 
                      "Formato", 
-                     "Orientação", 
+                     "OrientaÃ§Ã£o", 
                      "Margens", 
                      "Alinhamento", 
                      "Voltar";
@@ -133,18 +126,16 @@ MODULE Menu
     ENDPROC
 
     PROC tpWriteReportSettingsPageMenu( )
-        TPWrite("Definições de página:");
-        
-        
+        TPWrite("DefiniÃ§Ãµes de pÃ¡gina:");
+
         ! Display paper size
-        
         TPWrite "Formato da folha: " + paper_size + " (" +  NumToStr(paper_Width,3) + " mm, " +  NumToStr(paper_Length,3) + " mm)";
 
         ! Display paper orientation
-        TPWrite "Orientação da folha: " + paper_Orientation;
+        TPWrite "OrientaÃ§Ã£o da folha: " + paper_Orientation;
 
         ! Display paper margins
-        TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 3 ) + " (cabeçalho), " + NumToStr( paper_BottomMargin ,3 ) + " (rodapé), " + NumToStr( paper_LeftMargin, 3 ) + " (esquerda), " + NumToStr( paper_RightMargin ,3 ) + " (direita)";
+        TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 3 ) + " (cabeï¿½alho), " + NumToStr( paper_BottomMargin ,3 ) + " (rodapï¿½), " + NumToStr( paper_LeftMargin, 3 ) + " (esquerda), " + NumToStr( paper_RightMargin ,3 ) + " (direita)";
 
         ! Display text alignment
         TPWrite("Alinhamento do texto: " + paper_Alignment );
@@ -214,8 +205,8 @@ MODULE Menu
         ! Options to change orientation
         TPReadFK answerPaperMenu2, 
                  stEmpty , 
-                 "Cabeçalho" , 
-                 "Rodapé" , 
+                 "CabeÃ§alho" , 
+                 "RodapÃ©" , 
                  "Esquerda" , 
                  "Direita" , 
                  "Voltar" ;
@@ -284,6 +275,11 @@ MODULE Menu
             ! Clear the console
             TPErase;
 
+            ! Conversion of Pt in milimeeters
+            ! fontSizeMM = fontSizePT * 0.352778; 
+
+            ! Draw a random letter
+            draw( 'A' , 1 , "Classic" );
         ENDWHILE        
     ENDPROC
     
