@@ -95,7 +95,7 @@ MODULE Menu
     ! ==================== Code - writeMenu ======================= !
     
     PROC writeTextMenu( )
-        WHILE 5 <> answerPaperMenu DO
+        WHILE 0 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
@@ -105,7 +105,7 @@ MODULE Menu
     ! ==================== Code - settingsText ==================== !
 
     PROC settingsTextMenu( )
-        WHILE 5 <> answerPaperMenu DO
+        WHILE 0 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
@@ -115,7 +115,7 @@ MODULE Menu
     ! ==================== Code - settingsPage ==================== !
     
     PROC settingsPageMenu( )
-        WHILE 5 <> answerPaperMenu DO
+        WHILE 0 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
@@ -283,7 +283,7 @@ MODULE Menu
     ! ==================== Code - printingMenu ==================== !
 
     PROC printingPageMenu( )
-        WHILE 5 <> answerPaperMenu DO
+        WHILE 0 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
@@ -293,7 +293,7 @@ MODULE Menu
     ! ==================== Code - debugMenu ==================== !
 
     PROC debugMenu( )
-        WHILE 5 <> answerPaperMenu DO
+        WHILE 0 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
