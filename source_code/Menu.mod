@@ -46,11 +46,8 @@ MODULE Menu
     ! Initialize letters characteristics
     VAR num letter_lenght := 5;
     VAR num letter_width := 10;
-
-    ! Time variable
-    CONST num timeoutTime := 5; ! seconds
     
-     ! ==================== Code - default ========================= !
+    ! ==================== Code - default ========================= !
 
     ! Process for the inicialization program
     PROC startDefault( ) 
@@ -112,7 +109,7 @@ MODULE Menu
                      "Voltar";
             
             IF 1 = answersettingMenu THEN  
-                write_string( );
+                write_string;
                                 
             ELSEIF 2 = answersettingMenu THEN                                                        
 
@@ -124,7 +121,8 @@ MODULE Menu
                 answerWrittingMenu := 5;
                 ! Back to menu
             ENDIF
-        ENDWHILE        
+        ENDWHILE
+        answerWrittingMenu := 0;        
     ENDPROC
 
     ! ==================== Code - settingsText ==================== !
@@ -543,8 +541,7 @@ MODULE Menu
                      "Manual", 
                      "Ficheiro", 
                      stEmpty, 
-                     "Voltar",
-                     \MaxTime := timeoutTime;
+                     "Voltar";
             
             IF 1 = answerPrintingMenu THEN  
                 !automaticPrinting;                
