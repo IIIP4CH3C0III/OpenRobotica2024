@@ -1,5 +1,0 @@
-MODULE Module1
-    PROC Path_Start()
-
-    ENDPROC
-ENDMODULE
