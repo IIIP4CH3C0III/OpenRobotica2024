@@ -6,6 +6,10 @@ MODULE Menu
     VAR num answerInitMenu;
     VAR num answerPaperMenu;
     VAR num answerPaperMenu2;
+    VAR num answersettingMenu;
+    VAR num answerwritetextMenu;
+    VAR num answerprintingMenu;
+    VAR num answerdebugMenu;
 
     ! Variable that stores the text input
     VAR string userInputText ; 
@@ -31,8 +35,8 @@ MODULE Menu
     
     VAR string userInput;
 
-
-    ! ==================== Code - default ========================= !
+    
+     ! ==================== Code - default ========================= !
 
     ! Process for the inicialization program
     PROC startDefault( ) 
@@ -40,7 +44,7 @@ MODULE Menu
         TPErase;         
 
         ! JumpHome; !TODO
-        TPWrite "O robot estÃ¡ pronto a ser operado.";
+        TPWrite "O robot está pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
@@ -52,57 +56,64 @@ MODULE Menu
         TPErase; 
         
         ! Welcome page.
-        TPWrite "Plotter & Open Robï¿½tica";
+        TPWrite "Plotter & Open Robótica";
         
         ! Options of the menu
-        TPReadFK answerInitMenu ,"Plotter & Open RobÃ³tica" , "Escrever Manualmente" , "DefiniÃ§Ãµes texto" , "DefiniÃ§Ãµes folha" ,  "Imprimir",  "Debug";                                                                                            
+        TPReadFK answerInitMenu ,"Plotter & Open Robótica" , "Escrever Manualmente" , "Definições texto" , "Definições folha" ,  "Imprimir",  "Debug";                                                                                            
+! Where is stored the option  ! What it writes on the screen    ! Option 1               ! Option 2        ! Option 3           ! Option 4      ! Option 5 
                  
-        IF 1 = answerInitMenu THEN  
-            writeTextMenu;
-        ELSEIF 2 = answerInitMenu THEN                                                        
-           settingsTextMenu ;
-        ELSEIF 3 = answerInitMenu THEN
-            settingsPageMenu ;
-        ELSEIF 4 = answerInitMenu THEN
-            printingPageMenu ;                 
-        ELSEIF 5 = answerInitMenu THEN
-            debugMenu ;
-        ENDIF      
+            IF 1 = answerInitMenu THEN  
+                writeTextMenu;                      
+            ELSEIF 2 = answerInitMenu THEN                                                        
+               settingsTextMenu ;    
+            ELSEIF 3 = answerInitMenu THEN
+                settingsPageMenu ;
+            ELSEIF 4 = answerInitMenu THEN
+                printingPageMenu ;                 
+            ELSEIF 5 = answerInitMenu THEN
+                debugMenu ;
+            ENDIF      
     ENDPROC
 
     ! ==================== Code - writeMenu ======================= !
     
     PROC writeTextMenu( )
-        WHILE 0 <> answerPaperMenu DO
+        answerwritetextMenu := 1;
+        WHILE answerwritetextMenu <> 0 DO
             ! Clear the console
             TPErase;
-
+            TPWrite "Inable Function";
+            WaitTime(2);
+            answerwritetextMenu := 0;
         ENDWHILE        
     ENDPROC
 
     ! ==================== Code - settingsText ==================== !
 
     PROC settingsTextMenu( )
-        WHILE 0 <> answerPaperMenu DO
+        answersettingMenu := 1;
+        WHILE answersettingMenu <> 0 DO
             ! Clear the console
             TPErase;
-
+            TPWrite "Inable Function";
+            WaitTime(2);
+            answersettingMenu := 0;
         ENDWHILE        
     ENDPROC
 
     ! ==================== Code - settingsPage ==================== !
     PROC settingsPageMenu( )
-        WHILE 0 <> answerPaperMenu DO
+        WHILE 5 <> answerPaperMenu DO
             ! Clear the console
             TPErase;
 
-            tpWriteReportSettingsPageMenu ;
+            tpWriteReportSettingsPageMenu;
                                     
             ! Options to change settings of the page
             TPReadFK answerPaperMenu, 
                      stEmpty , 
                      "Formato", 
-                     "OrientaÃ§Ã£o", 
+                     "Orientação", 
                      "Margens", 
                      "Alinhamento", 
                      "Voltar";
@@ -119,23 +130,24 @@ MODULE Menu
             ELSEIF 4 = answerPaperMenu THEN
                 alignmentPageMenu ;                 
 
-            ELSEIF 5 = answerPaperMenu THEN
-                answerPaperMenu := 0 ;
+            ELSEIF 5 = answerPaperMenu THEN !Go out in the while
             ENDIF                             
         ENDWHILE        
     ENDPROC
 
     PROC tpWriteReportSettingsPageMenu( )
-        TPWrite("DefiniÃ§Ãµes de pÃ¡gina:");
-
+        TPWrite("Definições de página:");
+        
+        
         ! Display paper size
-        TPWrite "Formato da folha: " + paper_size + " (" +  NumToStr(paper_Width,3) + " mm, " +  NumToStr(paper_Length,3) + " mm)";
+        
+        TPWrite "Formato da folha: " + paper_size + " (" +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
 
         ! Display paper orientation
-        TPWrite "OrientaÃ§Ã£o da folha: " + paper_Orientation;
+        TPWrite "Orientação da folha: " + paper_Orientation;
 
         ! Display paper margins
-        TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 3 ) + " (cabeï¿½alho), " + NumToStr( paper_BottomMargin ,3 ) + " (rodapï¿½), " + NumToStr( paper_LeftMargin, 3 ) + " (esquerda), " + NumToStr( paper_RightMargin ,3 ) + " (direita)";
+        TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 0 ) + " (cabeçalho), " + NumToStr( paper_BottomMargin ,0 ) + " (rodapé), "+ NumToStr( paper_LeftMargin, 0 ) + " (esquerda), " + NumToStr( paper_RightMargin , 0 ) + " (direita)";
 
         ! Display text alignment
         TPWrite("Alinhamento do texto: " + paper_Alignment );
@@ -148,7 +160,7 @@ MODULE Menu
                  "A3" , 
                  "A4" , 
                  "A5" , 
-                 "Outro" , 
+                 stEmpty , 
                  "Voltar" ;
 
         IF 1 = answerPaperMenu2 THEN  
@@ -167,7 +179,7 @@ MODULE Menu
             paper_Length := a5Lenght;
         
         ELSEIF 4 = answerPaperMenu2 THEN
-            ! nothing for now
+            ! nothing for now (fuction enable)
             
         ELSEIF 5 = answerPaperMenu2 THEN
             answerPaperMenu2 := 0 ;
@@ -205,8 +217,8 @@ MODULE Menu
         ! Options to change orientation
         TPReadFK answerPaperMenu2, 
                  stEmpty , 
-                 "CabeÃ§alho" , 
-                 "RodapÃ©" , 
+                 "Cabeçalho" , 
+                 "Rodapé" , 
                  "Esquerda" , 
                  "Direita" , 
                  "Voltar" ;
@@ -214,7 +226,8 @@ MODULE Menu
         ! TODO does nothing at the moment 
         
         IF 1 = answerPaperMenu2 THEN  
-            paper_TopMargin := 20;
+            !paper_TopMargin := 20;
+            TPReadNum paper_TopMargin, "Qual é a nova margem?";
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
             paper_BottomMargin := 20;
@@ -259,27 +272,29 @@ MODULE Menu
 
     ! ==================== Code - printingMenu ==================== !
 
-    PROC printingPageMenu( )
-        WHILE 0 <> answerPaperMenu DO
-            ! Clear the console
-            TPErase;
+    !PROC ( )
+    !    answerprintingMenu := 1;
+    !    WHILE 0 <> answerprintingMenu DO
+    !        ! Clear the console
+    !        TPErase;
+    !        TPWrite "Inable Function";
+    !        WaitTime(2);
+    !        answerprintingMenu := 0;
 
-        ENDWHILE        
-    ENDPROC
+    !   ENDWHILE        
+    !ENDPROC
 
 
     ! ==================== Code - debugMenu ==================== !
 
     PROC debugMenu( )
-        WHILE 0 <> answerPaperMenu DO
+        answerdebugMenu := 1;
+        WHILE 0 <> answerdebugMenu DO
             ! Clear the console
             TPErase;
-
-            ! Conversion of Pt in milimeeters
-            ! fontSizeMM = fontSizePT * 0.352778; 
-
-            ! Draw a random letter
-            draw( 'A' , 1 , "Classic" );
+            TPWrite "Inable Function";
+            WaitTime(2);
+            answerdebugMenu := 0;
         ENDWHILE        
     ENDPROC
     

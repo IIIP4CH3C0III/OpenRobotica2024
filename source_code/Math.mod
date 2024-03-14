@@ -8,7 +8,7 @@ MODULE Math
     PERS string char_impress;
     
     !================ Menu de Impressão ============================
-    PROC impressmenu()
+    PROC printingPageMenu()
         
         !Frase a escrever
         write_string;
@@ -17,6 +17,8 @@ MODULE Math
             !Calculate
             calculo_size;
             !Relatorio
+            
+            tpWriteReportSettingsPageMenu;
             
             !Escolha de Menu
             TPReadFK answer_impress, "Que passo quer efetuar?" , "Definições Texto", "Definição Papel", "Reescrever Frase", "IMPRIMIR", "Voltar";
