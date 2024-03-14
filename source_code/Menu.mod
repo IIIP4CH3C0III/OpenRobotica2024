@@ -54,7 +54,7 @@ MODULE Menu
         TPErase;         
 
         ! JumpHome; !TODO
-        TPWrite "O robot est� pronto a ser operado.";
+        TPWrite "O robot est  pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
@@ -264,11 +264,11 @@ MODULE Menu
         TPWrite " ";
                       
         ! Display font type
-        TPWrite("Fonte de Letra: " + font_type ); 
+        TPWrite("Fonte de Letra: " + text_FontType ); 
         TPWrite " ";
 
         ! Display letter size
-        TPWrite "Tamanho de letra:" + text_SizePT + "pt" + "("NumToStr(letter_lenght,0) + " mm , " +  NumToStr(letter_width,0) + " mm )";
+        TPWrite "Tamanho de letra:" + NumToStr(text_SizePT,0) + "pt" + "(" + NumToStr(letter_lenght,0) + " mm , " +  NumToStr(letter_width,0) + " mm )";
         TPWrite " ";
 
         ! Display letter color
@@ -392,27 +392,27 @@ MODULE Menu
 
     PROC tpWriteReportSettingsPageMenu()
         TPWrite("Definições de página:");
-        TPWrite " "        
+        TPWrite " "   ;     
 
         ! Display paper size
         TPWrite "Formato da folha: " + paper_size + " ( " +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
-        TPWrite " "        
+        TPWrite " " ;      
 
         ! Display paper orientation
         TPWrite "Orientação da folha: " + paper_Orientation;
-        TPWrite " "        
+        TPWrite " " ;       
 
         ! Display paper margins
-        TPWrite "Margens da folha: "
-        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabeçalho)," 
-        TPWrite " " + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodapé)," 
-        TPWrite " " + NumToStr( paper_LeftMargin, 0 ) + " (mm) (esquerda)," 
+        TPWrite "Margens da folha: ";
+        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabeçalho)," ;
+        TPWrite " " + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodapé)," ;
+        TPWrite " " + NumToStr( paper_LeftMargin, 0 ) + " (mm) (esquerda)," ;
         TPWrite " " + NumToStr( paper_RightMargin , 0 ) + " (mm) (direita)" ;
-        TPWrite " "        
+        TPWrite " "  ;      
 
         ! Display text alignment
         TPWrite("Alinhamento do texto: " + paper_Alignment );
-        TPWrite " "        
+        TPWrite " " ;       
     ENDPROC
 
     PROC formatPageMenu( )
@@ -559,7 +559,7 @@ MODULE Menu
         ! Clear the console
         TPErase;
     
-        TPRead   
+        !TPRead   
     ENDPROC
     
     
