@@ -79,7 +79,8 @@ MODULE Menu
                  
         IF 1 = answerInitMenu THEN  
             writeTextMenu;                      
-        ELSEIF 2 = answerInitMenu THEN                                                        
+        ELSEIF 2 = answerInitMenu THEN
+           answersettingMenu := 0;
            settingsTextMenu ;    
         ELSEIF 3 = answerInitMenu THEN
             settingsPageMenu ;
@@ -106,20 +107,6 @@ MODULE Menu
     ! ==================== Code - settingsText ==================== !
 
     PROC settingsTextMenu( )
-       ! Clear the console
-       TPErase;
-
-       tpWriteReportSettingsTextMenu;
-       
-       ! Options to change settings of the page
-       TPReadFK answerSettingMenu, 
-                stEmpty , 
-                "Rotação", 
-                "Espaçamento entre letras", 
-                "Espaçamento entre paragráfos", 
-                "Página seguinte", 
-                "Voltar";
-
         WHILE answersettingMenu <> 5 DO
             ! Clear the console
             TPErase;
@@ -157,20 +144,6 @@ MODULE Menu
     ENDPROC
 
     PROC settingsTextMenu2( )
-       ! Clear the console
-       TPErase;
-
-       tpWriteReportSettingsTextMenu;
-       
-       ! Options to change settings of the page
-       TPReadFK answerSettingMenu, 
-                stEmpty , 
-                "Rotação", 
-                "Espaçamento entre letras", 
-                "Espaçamento entre paragráfos", 
-                "Página seguinte", 
-                "Voltar";
-
         WHILE answersettingMenu <> 5 DO
             ! Clear the console
             TPErase;
@@ -207,20 +180,6 @@ MODULE Menu
     ENDPROC
 
     PROC settingsTextMenu3( )
-       ! Clear the console
-       TPErase;
-
-       tpWriteReportSettingsTextMenu;
-       
-       ! Options to change settings of the page
-       TPReadFK answerSettingMenu, 
-                stEmpty , 
-                "Rotação", 
-                "Espaçamento entre letras", 
-                "Espaçamento entre paragráfos", 
-                "Página seguinte", 
-                "Voltar";
-
         WHILE answersettingMenu <> 5 DO
             ! Clear the console
             TPErase;
@@ -261,31 +220,24 @@ MODULE Menu
         TPErase;
        
         TPWrite("Definições de Texto:");
-        TPWrite " ";
                       
         ! Display font type
         TPWrite("Fonte de Letra: " + text_FontType ); 
-        TPWrite " ";
 
         ! Display letter size
         TPWrite "Tamanho de letra:" + NumToStr(text_SizePT,0) + "pt" + "(" + NumToStr(letter_lenght,0) + " mm , " +  NumToStr(letter_width,0) + " mm )";
-        TPWrite " ";
 
         ! Display letter color
         TPWrite "Cor de Letra: " + text_Color;
-        TPWrite " ";
                 
         ! Display letter rotation
         TPWrite "Rotação do texto: " + NumToStr( text_Rotation, 0 ) + " graus";
-        TPWrite " ";
 
         ! Display space between letters
         TPWrite "Espaço entre letras: " + NumToStr( text_SpaceLetters, 0 ) + " mm";
-        TPWrite " ";
 
         ! Display space between paragraphs
         TPWrite "Espaço entre parágrafos: " + NumToStr( text_SpaceParag, 0 ) + " mm";
-        TPWrite " ";
     ENDPROC
 
     PROC fontTypePageMenu( )
@@ -392,27 +344,20 @@ MODULE Menu
 
     PROC tpWriteReportSettingsPageMenu()
         TPWrite("Definições de página:");
-        TPWrite " "   ;     
 
         ! Display paper size
         TPWrite "Formato da folha: " + paper_size + " ( " +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
-        TPWrite " " ;      
 
         ! Display paper orientation
         TPWrite "Orientação da folha: " + paper_Orientation;
-        TPWrite " " ;       
 
         ! Display paper margins
         TPWrite "Margens da folha: ";
-        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabeçalho)," ;
-        TPWrite " " + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodapé)," ;
-        TPWrite " " + NumToStr( paper_LeftMargin, 0 ) + " (mm) (esquerda)," ;
-        TPWrite " " + NumToStr( paper_RightMargin , 0 ) + " (mm) (direita)" ;
-        TPWrite " "  ;      
+        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabeçalho)," + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodapé)," ;
+        TPWrite " " + NumToStr( paper_LeftMargin, 0 ) + " (mm) (esquerda)," + NumToStr( paper_RightMargin , 0 ) + " (mm) (direita)" ;
 
         ! Display text alignment
         TPWrite("Alinhamento do texto: " + paper_Alignment );
-        TPWrite " " ;       
     ENDPROC
 
     PROC formatPageMenu( )
