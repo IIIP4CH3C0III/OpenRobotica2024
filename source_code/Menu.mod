@@ -9,6 +9,7 @@ MODULE Menu
     VAR num answerSettingMenu;
     VAR num answerWriteTextMenu;
     VAR num answerWriteTextMenu2;
+    VAR num answerWrittingMenu;
     VAR num answerPrintingMenu;
     VAR num answerDebugMenu;
 
@@ -45,6 +46,9 @@ MODULE Menu
     ! Initialize letters characteristics
     VAR num letter_lenght := 5;
     VAR num letter_width := 10;
+
+    ! Time variable
+    CONST num timeoutTime := 5; ! seconds
     
      ! ==================== Code - default ========================= !
 
@@ -54,7 +58,7 @@ MODULE Menu
         TPErase;         
 
         ! JumpHome; !TODO
-        TPWrite "O robot est  pronto a ser operado.";
+        TPWrite "O robot está pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
@@ -94,13 +98,32 @@ MODULE Menu
     ! ==================== Code - writeMenu ======================= !
     
     PROC writeTextMenu( )
-        answerwritetextMenu := 1;
-        WHILE answerwritetextMenu <> 0 DO
+        WHILE answerWrittingMenu <> 5 DO
             ! Clear the console
             TPErase;
-            TPWrite "Inable Function";
-            WaitTime(2);
-            answerwritetextMenu := 0;
+
+            ! Options to change settings of the page
+            TPReadFK answerSettingMenu, 
+                     userInputText , 
+                     "Escrever", 
+                     stEmpty, 
+                     stEmpty, 
+                     stEmpty, 
+                     "Voltar";
+            
+            IF 1 = answersettingMenu THEN  
+                write_string( );
+                                
+            ELSEIF 2 = answersettingMenu THEN                                                        
+
+            ELSEIF 3 = answersettingMenu THEN
+                
+            ELSEIF 4 = answersettingMenu THEN
+
+            ELSEIF 5 = answersettingMenu THEN 
+                answerWrittingMenu := 5;
+                ! Back to menu
+            ENDIF
         ENDWHILE        
     ENDPROC
 
@@ -496,8 +519,49 @@ MODULE Menu
         ENDIF                             
     ENDPROC
 
-    
 
+    !===================== Code - ImpressMenu ============================
+
+    PROC printingPageMenu()        
+         VAR bool x := FALSE;
+         WHILE answerPrintingMenu <> 5 DO
+            ! Clear the console
+            TPErase;
+
+            IF FALSE = x THEN
+                tpWriteReportSettingsTextMenu;
+                x := TRUE ;
+            ELSE 
+                tpWriteReportSettingsPageMenu;
+                x := FALSE ;
+            ENDIF
+            
+            ! Options to change settings of the page
+            TPReadFK answerPrintingMenu, 
+                     stEmpty , 
+                     "Automático", 
+                     "Manual", 
+                     "Ficheiro", 
+                     stEmpty, 
+                     "Voltar",
+                     \MaxTime := timeoutTime;
+            
+            IF 1 = answerPrintingMenu THEN  
+                !automaticPrinting;                
+            ELSEIF 2 = answerPrintingMenu THEN                                                        
+                !manualPriting;
+            ELSEIF 3 = answerPrintingMenu THEN
+                !filesPriting;
+            ELSEIF 4 = answerPrintingMenu THEN
+
+            ELSEIF 5 = answerPrintingMenu THEN 
+                answerPrintingMenu := 5;
+                ! Back to menu
+            ENDIF
+        ENDWHILE        
+        answerPrintingMenu := 0;
+    ENDPROC
+    
     ! ==================== Code - debugMenu ==================== !
 
     PROC debugMenu( )
