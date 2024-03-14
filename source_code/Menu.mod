@@ -33,6 +33,12 @@ MODULE Menu
     VAR num paper_Width := a4Width;
     VAR num paper_Length := a4Lenght; 
     
+    ! Initialize the text characteristics
+    VAR num spacement_letters := 2;
+    VAR num letter_lenght := 5;
+    VAR num letter_width := 10;
+    VAR string font_type := "Normal";
+    
     VAR string userInput;
 
     
@@ -91,14 +97,57 @@ MODULE Menu
     ! ==================== Code - settingsText ==================== !
 
     PROC settingsTextMenu( )
-        answersettingMenu := 1;
-        WHILE answersettingMenu <> 0 DO
+        
+        WHILE answersettingMenu <> 5 DO
             ! Clear the console
             TPErase;
-            TPWrite "Inable Function";
-            WaitTime(2);
-            answersettingMenu := 0;
-        ENDWHILE        
+            tpWriteReportSettingsTextMenu;
+            
+            ! Options to change settings of the page
+            TPReadFK answersettingMenu, 
+                     stEmpty , 
+                     "Largura da Letra", 
+                     "Altura da Letra", 
+                     "Espaçamento entre Letras", 
+                     "Tipo de Letra", 
+                     "Voltar";
+            
+            IF 1 = answersettingMenu THEN  
+                TPReadNum letter_lenght, "Qual é o comprimento da letra (mm)?";
+                
+            ELSEIF 2 = answersettingMenu THEN                                                        
+                TPReadNum letter_width, "Qual é a altura da letra (mm)?";  
+                
+            ELSEIF 3 = answersettingMenu THEN
+                TPReadNum spacement_letters, "Qual é o espaçamento entre letras (mm)?";
+                
+            ELSEIF 4 = answersettingMenu THEN
+                !alignmentPageMenu ;                 
+
+            ELSEIF 5 = answersettingMenu THEN !Go out in the while
+            ENDIF
+                     
+        ENDWHILE   
+        answersettingMenu := 0;
+    ENDPROC
+    
+    PROC tpWriteReportSettingsTextMenu()
+        TPWrite("Definições de Texto:");
+             
+        ! Display letter size
+        
+        TPWrite "Tamanho da letra: Comprimento " + NumToStr(letter_lenght,0) + " mm      Altura : " +  NumToStr(letter_width,0) + " mm";
+
+        ! Display espaçamento
+        TPWrite "Espaçamento entre letras: " + NumToStr(spacement_letters,0) + " mm";
+        
+        ! Display text alignment
+        TPWrite("Tipo de Letra: " + font_type ); 
+        
+        ! Display paper margins
+        !TPWrite "Margens da folha: " + NumToStr( paper_TopMargin, 0 ) + " (cabeçalho), " + NumToStr( paper_BottomMargin ,0 ) + " (rodapé), "+ NumToStr( paper_LeftMargin, 0 ) + " (esquerda), " + NumToStr( paper_RightMargin , 0 ) + " (direita)";
+
+           
     ENDPROC
 
     ! ==================== Code - settingsPage ==================== !
@@ -132,16 +181,16 @@ MODULE Menu
 
             ELSEIF 5 = answerPaperMenu THEN !Go out in the while
             ENDIF                             
-        ENDWHILE        
+        ENDWHILE
+        
+        answerPaperMenu := 0;
     ENDPROC
 
-    PROC tpWriteReportSettingsPageMenu( )
+    PROC tpWriteReportSettingsPageMenu()
         TPWrite("Definições de página:");
         
-        
         ! Display paper size
-        
-        TPWrite "Formato da folha: " + paper_size + " (" +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
+        TPWrite "Formato da folha: " + paper_size + " ( " +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
 
         ! Display paper orientation
         TPWrite "Orientação da folha: " + paper_Orientation;
@@ -227,16 +276,19 @@ MODULE Menu
         
         IF 1 = answerPaperMenu2 THEN  
             !paper_TopMargin := 20;
-            TPReadNum paper_TopMargin, "Qual é a nova margem?";
+            TPReadNum paper_TopMargin, "Qual é a nova margem topo (mm)?";
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            paper_BottomMargin := 20;
+            
+            TPReadNum paper_BottomMargin, "Qual é a nova margem debaixo (mm)?";
             
         ELSEIF 3 = answerPaperMenu2 THEN
-            paper_LeftMargin := 10;
+            
+            TPReadNum paper_RightMargin, "Qual é a nova margem direita? (mm)";
             
         ELSEIF 4 = answerPaperMenu2 THEN
-            paper_RightMargin := 10;
+            !paper_RightMargin := 10;
+            TPReadNum paper_LeftMargin, "Qual é a nova margem esquerda? (mm)";
             
         ELSEIF 5 = answerPaperMenu2 THEN
             answerPaperMenu2 := 0 ;
@@ -270,20 +322,7 @@ MODULE Menu
         ENDIF                             
     ENDPROC
 
-    ! ==================== Code - printingMenu ==================== !
-
-    !PROC ( )
-    !    answerprintingMenu := 1;
-    !    WHILE 0 <> answerprintingMenu DO
-    !        ! Clear the console
-    !        TPErase;
-    !        TPWrite "Inable Function";
-    !        WaitTime(2);
-    !        answerprintingMenu := 0;
-
-    !   ENDWHILE        
-    !ENDPROC
-
+    
 
     ! ==================== Code - debugMenu ==================== !
 
