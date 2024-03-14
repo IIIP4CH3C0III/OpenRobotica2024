@@ -5,65 +5,67 @@ MODULE Fonts
     CONST num letterWidthLowerCaseNormalFont  := 1;
     CONST num letterHeightLowerCaseNormalFont := 1;
 
-PROC draw( VAR char character )
-
-       IF "Classic" = text_FontType THEN 
-           IF 'A' = character OR 'a' = character THEN
+    PROC draw()
+        !For test
+        TPWrite charPrint;
+        
+        IF "Classic" = text_FontType THEN 
+           IF "A" = charPrint OR "a" = charPrint THEN
                ! Instructions to draw letter "A"
-           ELSEIF 'B' = character OR 'b' = character THEN
+           ELSEIF "B" = charPrint OR "b" = charPrint THEN
                ! Instructions to draw letter "B"
-           ELSEIF 'C' = character OR 'c' = character THEN
+           ELSEIF "C" = charPrint OR "c" = charPrint THEN
                ! Instructions to draw letter "C"
-           ELSEIF 'D' = character OR 'd' = character THEN
+           ELSEIF "D" = charPrint OR "d" = charPrint THEN
                ! Instructions to draw letter "D"
-           ELSEIF 'E' = character OR 'e' = character THEN
+           ELSEIF "E" = charPrint OR "e" = charPrint THEN
                ! Instructions to draw letter "E"
-           ELSEIF 'F' = character OR 'f' = character THEN
+           ELSEIF "F" = charPrint OR "f" = charPrint THEN
                ! Instructions to draw letter "F"
-           ELSEIF 'G' = character OR 'g' = character THEN
+           ELSEIF "G" = charPrint OR "g" = charPrint THEN
                ! Instructions to draw letter "G"
-           ELSEIF 'H' = character OR 'h' = character THEN
+           ELSEIF "H" = charPrint OR "h" = charPrint THEN
                ! Instructions to draw letter "H"
-           ELSEIF 'I' = character OR 'i' = character THEN
+           ELSEIF "I" = charPrint OR "i" = charPrint THEN
                ! Instructions to draw letter "I"
-           ELSEIF 'J' = character OR 'j' = character THEN
+           ELSEIF "J" = charPrint OR "j" = charPrint THEN
                ! Instructions to draw letter "J"
-           ELSEIF 'K' = character OR 'k' = character THEN
+           ELSEIF "K" = charPrint OR "k" = charPrint THEN
                ! Instructions to draw letter "K"
-           ELSEIF 'L' = character OR 'l' = character THEN
+           ELSEIF "L" = charPrint OR "l" = charPrint THEN
                ! Instructions to draw letter "L"
-           ELSEIF 'M' = character OR 'm' = character THEN
+           ELSEIF "M" = charPrint OR "m" = charPrint THEN
                ! Instructions to draw letter "M"
-           ELSEIF 'N' = character OR 'n' = character THEN
+           ELSEIF "N" = charPrint OR "n" = charPrint THEN
                ! Instructions to draw letter "N"
-           ELSEIF 'O' = character OR 'o' = character THEN
+           ELSEIF "O" = charPrint OR "o" = charPrint THEN
                ! Instructions to draw letter "O"
-           ELSEIF 'P' = character OR 'p' = character THEN
+        ELSEIF "P" = charPrint OR "p" = charPrint THEN
                ! Instructions to draw letter "P"
-           ELSEIF 'Q' = character OR 'q' = character THEN
+           ELSEIF "Q" = charPrint OR "q" = charPrint THEN
                ! Instructions to draw letter "Q"
-           ELSEIF 'R' = character OR 'r' = character THEN
+           ELSEIF "R" = charPrint OR "r" = charPrint THEN
                ! Instructions to draw letter "R"
-           ELSEIF 'S' = character OR 's' = character THEN
+           ELSEIF "S" = charPrint OR "s" = charPrint THEN
                ! Instructions to draw letter "S"
-           ELSEIF 'T' = character OR 't' = character THEN
+           ELSEIF "T" = charPrint OR "t" = charPrint THEN
                ! Instructions to draw letter "T"
-           ELSEIF 'U' = character OR 'u' = character THEN
+           ELSEIF "U" = charPrint OR "u" = charPrint THEN
                ! Instructions to draw letter "U"
-           ELSEIF 'V' = character OR 'v' = character THEN
+           ELSEIF "V" = charPrint OR "v" = charPrint THEN
                ! Instructions to draw letter "V"
-           ELSEIF 'W' = character OR 'w' = character THEN
+           ELSEIF "W" = charPrint OR "w" = charPrint THEN
                ! Instructions to draw letter "W"
-           ELSEIF 'X' = character OR 'x' = character THEN
+           ELSEIF "X" = charPrint OR "x" = charPrint THEN
                ! Instructions to draw letter "X"
-           ELSEIF 'Y' = character OR 'y' = character THEN
+           ELSEIF "Y" = charPrint OR "y" = charPrint THEN
                ! Instructions to draw letter "Y"
-           ELSEIF 'Z' = character OR 'z' = character THEN
+           ELSEIF "Z" = charPrint OR "z" = charPrint THEN
                ! Instructions to draw letter "Z"
-           ELSEIF ' ' = character THEN
+           ELSEIF " " = charPrint THEN
                ! Instructions to draw letter " "
            ELSE
-               ! Instructions for unrecognized characters
+               ! Instructions for unrecognized charPrints
            ENDIF
        ENDIF
     ENDPROC    
