@@ -1,5 +1,8 @@
 MODULE Fonts
 
+    ! Offset Z
+    VAR num offsetZ := 10;
+
     ! On the paper
     
     VAR robtarget target_oInf1Esq1;
@@ -64,6 +67,9 @@ MODULE Fonts
     VAR robtarget target_aSup2Dir1;
     VAR robtarget target_aSup2Dir2;
 
+    ! Last Position     
+    VAR robtarget last_position;
+
 PROC draw( )
     
        TPWrite "Caracter a Imprimir: " + character;
@@ -121,8 +127,70 @@ PROC draw( )
 	        ELSEIF "Y" = character OR "y" = character THEN
 	            ! Instructions to draw letter "Y"
 	        ELSEIF "Z" = character OR "z" = character THEN
-	            ! Instructions to draw letter "Z"
 
+	            ! Instructions to draw letter "Z"
+		        target_oInf1Esq1 := Offs(origem, coord_y_letter, coord_x_letter, -offsetZ); 
+		        target_oInf1Esq2 := Offs(target_oInf1Esq1, 0, 0, offsetZ);
+		        target_oInf1Centro := Offs(target_oInf1Esq1, altura_letras, 0, 0);
+		        target_oInf1Dir1 := Offs(target_oInf1Centro, 0, comprimento_letras, 0);
+		        target_oInf1Dir2 := Offs(target_oInf1Dir1, -altura_letras/4, comprimento_letras,0);
+
+		        target_oInf2Esq1 := Offs(target_oInf1Esq1, 0, 0, offsetZ);
+		        target_oInf2Esq2 := Offs(target_oInf2Esq1, 0, 0, offsetZ);
+		        target_oInf2Centro := Offs(target_oInf2Esq1, altura_letras, 0, 0);
+		        target_oInf2Dir1 := Offs(target_oInf2Centro, 0, comprimento_letras, 0);
+		        target_oInf2Dir2 := Offs(target_oInf2Dir1, -altura_letras/4, comprimento_letras,0);
+
+		        target_oCentroEsq1 := Offs(target_oInf1Esq1, 0, 0, offsetZ);
+		        target_oCentroEsq2 := Offs(target_oCentroEsq1, 0, 0, offsetZ);
+		        target_oCentroCentro := Offs(target_oCentroEsq1, altura_letras, 0, 0);
+		        target_oCentroDir1 := Offs(target_oCentroCentro, 0, comprimento_letras, 0);
+		        target_oCentroDir2 := Offs(target_oCentroDir1, -altura_letras/4, comprimento_letras,0);
+
+		        target_oSup1Esq1 := Offs(target_oCentroEsq1, 0, 0, offsetZ);
+		        target_oSup1Esq2 := Offs(target_oSup1Esq1, 0, 0, offsetZ);
+		        target_oSup1Centro := Offs(target_oSup1Esq1, altura_letras, 0, 0);
+		        target_oSup1Dir1 := Offs(target_oSup1Centro, 0, comprimento_letras, 0);
+		        target_oSup1Dir2 := Offs(target_oSup1Dir1, -altura_letras/4, comprimento_letras,0);
+
+		        target_oSup2Esq1 := Offs(target_oSup1Esq1, 0, 0, offsetZ);
+		        target_oSup2Esq2 := Offs(target_oSup2Esq1, 0, 0, offsetZ);
+		        target_oSup2Centro := Offs(target_oSup2Esq1, altura_letras, 0, 0);
+		        target_oSup2Dir1 := Offs(target_oSup2Centro, 0, comprimento_letras, 0);
+		        target_oSup2Dir2 := Offs(target_oSup2Dir1, -altura_letras/4, comprimento_letras,0);
+
+		        ! Movement
+		        MoveJ target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf1Centro, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf1Dir1, v100, z0, pen\WObj:=Workobject_Paper;
+		        MoveC target_oInf1Dir2, target_oInf2Centro, v100, fine, pen\WObj:=Workobject_Paper;
+
+		        MoveL target_oInf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf2Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf2Centro, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf2Dir1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+		        MoveL target_oCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oCentroEsq2, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oCentroDir1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oCentroDir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Centro, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Dir1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+		        MoveL target_oSup2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup2Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup2Centro, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup2Dir1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+		        
 	        ELSEIF " " = character THEN
 	            ! Instructions to draw letter " "
 	        ELSE
