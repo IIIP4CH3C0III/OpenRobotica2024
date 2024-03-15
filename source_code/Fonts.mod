@@ -128,14 +128,14 @@ PROC draw( )
 	            ! Instructions to draw letter "Y"
 	        ELSEIF "Z" = character OR "z" = character THEN
 
-	            ! Instructions to draw letter "Z"
+	           ! Instructions to draw letter "Z"
 		        target_aInf1Esq1 := Offs(origem, coord_y_letter, coord_x_letter, -offsetZ); 
 		        target_oInf1Esq1 := Offs(origem, coord_y_letter, coord_x_letter, 0); 
 		        target_aInf1Dir2 := Offs(target_aInf1Esq1, 0, comprimento_letras,0);
-		        target_oInf1Dir2 := Offs(origem, 0, comprimento_letras,0);
+		        target_oInf1Dir2 := Offs(target_oInf1Esq1, 0, comprimento_letras,0);
 
-		        target_aSup1Esq1 := Offs(origem, altura_letras, 0, -offsetZ);
-		        target_oSup1Esq1 := Offs(origem, altura_letras, 0, 0);
+		        target_aSup1Esq1 := Offs(target_aInf1Esq1, altura_letras, 0, 0);
+		        target_oSup1Esq1 := Offs(target_oInf1Esq1, altura_letras, 0, 0);
 		        target_aSup1Dir2 := Offs(target_aSup1Esq1, 0, comprimento_letras,0);
 		        target_oSup1Dir2 := Offs(target_oSup1Esq1, 0, comprimento_letras,0);
 
@@ -147,12 +147,13 @@ PROC draw( )
 		        MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
 		        MoveL target_aInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
 		        
+
+		        
 	        ELSEIF " " = character THEN
 	            ! Instructions to draw letter " "
 	        ELSE
 
 	        ENDIF
 	      ENDIF
-          last_position := CRobT(\Tool:=pen\WObj:=Workobject_Paper);
     ENDPROC    
 ENDMODULE
