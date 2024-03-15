@@ -5,8 +5,7 @@ MODULE Fonts
     CONST num letterWidthLowerCaseNormalFont  := 1;
     CONST num letterHeightLowerCaseNormalFont := 1;
 
-PROC draw( VAR string character )
-
+PROC draw( )
        IF "Classic" = text_FontType THEN 
 	        IF "A" = character OR "a" = character THEN
 	            ! Instructions to draw letter "A"
@@ -65,6 +64,5 @@ PROC draw( VAR string character )
 	        ELSE
 	        ENDIF
 	      ENDIF
-       ENDIF
     ENDPROC    
 ENDMODULE

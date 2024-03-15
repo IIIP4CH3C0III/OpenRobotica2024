@@ -9,11 +9,11 @@ MODULE Math
     VAR num lenght_char_impress := 0;
     VAR num space_free;
     VAR num letter_lenght_aut;
-        
+      
     PROC write_string()
-        TPWrite "Insira a(s) palavra(s) pretendida()s para imprimir.";
+        TPWrite "Insira a(s) palavra(s) pretendida(s) para imprimir.";
         userInputText := UIAlphaEntry(
-            \Header:= "Impressão",
+            \Header:= "Impress�o",
             \Message:= ""
             \Icon:=iconInfo
             \InitString:= "OPEN ROBOTICA");
@@ -54,7 +54,7 @@ MODULE Math
         !Calculo estimado para cada letra
         space_free := paper_Length - paper_LeftMargin - paper_RightMargin;
         
-        letter_lenght_aut := (space_free - ((lenght_char_impress - 1) * spacement_letters)) DIV lenght_char_impress;
+        letter_lenght_aut := (space_free - ((lenght_char_impress - 1) * text_SpaceLetters)) DIV lenght_char_impress;
         
     ENDPROC
     PROC impressmenu()

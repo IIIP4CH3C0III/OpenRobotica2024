@@ -1,4 +1,4 @@
-MODULE Print
+MODULE Print    
     PROC impress_mecanism()
         TPErase;
         
@@ -6,7 +6,7 @@ MODULE Print
 
 		FOR i FROM 1 TO StrLen( userInputText ) DO
             charPrint := StrPart( userInputText, i, 1);
-            draw( charPrint );
-		ENDFOR
+            draw;
+		ENDFOR        
     ENDPROC
 ENDMODULE
