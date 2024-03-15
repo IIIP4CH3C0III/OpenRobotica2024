@@ -15,6 +15,7 @@ MODULE Menu
 
     ! Variable that stores the text input
     VAR string userInputText ; 
+    VAR string charPrint;
 
     ! Dimensions of the format papers (mm)
     CONST num a3Lenght := 297; 
@@ -99,6 +100,7 @@ MODULE Menu
             ! Clear the console
             TPErase;
 
+            TPWrite("Frase a escrever:");
             ! Options to change settings of the page
             TPReadFK answerSettingMenu, 
                      userInputText , 
@@ -184,10 +186,10 @@ MODULE Menu
                 TPReadNum text_Rotation, "Qual é a rotação pretendida? (graus)";
                                 
             ELSEIF 2 = answersettingMenu THEN                                                        
-                TPReadNum text_SizePT, "Qual é o espaçamento entre letras? (mm) (default = 2)";
+                TPReadNum text_SpaceLetters, "Qual é o espaçamento entre letras? (mm) (default = 2)";
                 
             ELSEIF 3 = answersettingMenu THEN
-                TPReadNum text_SizePT, "Qual é o espaçamento entre paragráfos? (mm) (default = 5)";
+                TPReadNum text_SpaceParag, "Qual é o espaçamento entre paragráfos? (mm) (default = 5)";
                 
             ELSEIF 4 = answersettingMenu THEN
                 answersettingMenu := 0;
@@ -462,8 +464,8 @@ MODULE Menu
                  stEmpty , 
                  "Cabeçalho" , 
                  "Rodapé" , 
-                 "Esquerda" , 
                  "Direita" , 
+                 "Esquerda" , 
                  "Voltar" ;
 
         ! TODO does nothing at the moment 
@@ -526,25 +528,24 @@ MODULE Menu
             ! Clear the console
             TPErase;
 
-            IF FALSE = x THEN
-                tpWriteReportSettingsTextMenu;
-                x := TRUE ;
-            ELSE 
-                tpWriteReportSettingsPageMenu;
-                x := FALSE ;
+            IF TRUE = x THEN
+    	        tpWriteReportSettingsTextMenu;
+            ELSE
+	            tpWriteReportSettingsPageMenu;
             ENDIF
-            
+        
             ! Options to change settings of the page
             TPReadFK answerPrintingMenu, 
                      stEmpty , 
                      "Automático", 
                      "Manual", 
                      "Ficheiro", 
-                     stEmpty, 
+                     "Scroll", 
                      "Voltar";
             
             IF 1 = answerPrintingMenu THEN  
-                !automaticPrinting;                
+                !automaticPrinting;
+                                
             ELSEIF 2 = answerPrintingMenu THEN                                                        
                 !manualPriting;
             ELSEIF 3 = answerPrintingMenu THEN
