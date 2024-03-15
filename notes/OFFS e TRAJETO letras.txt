@@ -158,20 +158,108 @@ PROC Letra_B()
     MoveL inf_centro, v100, z30, pen\WObj:=Workobject_Paper;
     MoveL inf_esq1, v100, z0, pen\WObj:=Workobject_Paper;
 
-! Letra E
+! Letra E // já está com novas variáveis
 
-! definição Offs
+! Instructions to draw letter "E"
 
-    ! adaptar origem
-
-    MoveJ Origem,v1000,fine,pen\WObj:=Workobject_Paper;
+    target_aCentroEsq1 := Offs (target_oSup1Dir2, -altura_letras/2, -comprimento_letras, 0);
+    target_CentroEsq1 := Offs (target_oCentroEsq1, 0, 0, -offsetZ);
+    target_CentroCentro := Offs (target_CentroEsq1, 0, comprimento_letras/2, 0);
     
-    up_inf_esq1 := Offs (Origem, 0, 0, -10);
-    up_inf_dir2 := Offs (up_inf_esq1, 0, 0, 0); 
+! Movement
+
+    MoveJ target_aInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroCentro, v100, fine, pen\WObj:=Workobject_Paper; !termina na ponta do traço do meio do E
+
+
+! Letra F 
+
+! Instructions to draw letter "F"
+
+    target_aCentroEsq1 := Offs (target_aSup1Dir2, -altura_letras/2, -comprimento_letras, 0);
+    target_CentroEsq1 := Offs (target_oCentroEsq1, 0, 0, -offsetZ);
+    target_CentroCentro := Offs (target_CentroEsq1, 0, comprimento_letras/2, 0);
+    
+! Movement
+
+    MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroCentro, v100, fine, pen\WObj:=Workobject_Paper; !termina na ponta do traço do meio do F
+
+! Letra G 
+
+! Instructions to draw letter "G"
+
+    target_aCentroCentro := Offs (target_aInf1Esq1, altura_letras/2, comprimento_letras/2, 0);
+    target_oCentroCentro := Offs (target_aCentroCentro, 0, 0, offsetZ);
+    target_CentroDir2 := Offs (target_oCentroCentro, 0, comprimento_letras/2, 0);
+    target_Inf2Dir2 := Offs (target_CentroDir2, -altura_letras/5, 0, 0);
+    target_Inf1Dir1 := Offs (target_Inf2Dir2, -altura_letras/5, -comprimento_letras/5, 0);
+    target_Inf1Esq2 := Offs (target_Inf1Dir1, 0, -2*comprimento_letras/5, 0);
+    target_Inf2Esq1 := Offs (target_Inf1Esq2, altura_letras/5, -comprimento_letras/5, 0);
+    target_Sup2Esq1 := Offs (target_Inf2Esq1, 2*altura_letras/5, 0, 0);
+    target_Sup1Esq2 := Offs (target_Sup2Esq1, altura_letras/5, comprimento_letras/5, 0);
+    target_Sup1Dir1 := Offs (target_Sup1Esq2, 0, 2*comprimento_letras/5, 0);
+    target_Sup2Dir2 := Offs (target_Sup1Dir1, -altura_letras/5, comprimento_letras/5, 0);
+    
+! Movement
+
+    MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroDir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_Inf2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveC target_Inf1Dir1, v100, fine, pen\WObj:=Workobject_Paper; !preciso de outro target para o MoveC
+    MoveL target_Inf1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveC target_Inf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_Sup2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveC target_Sup1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_Sup1Dir1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveC target_Sup2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+! Letra H 
+
+! Instructions to draw letter "H"
+
+    target_aCentroEsq1 := Offs (target_aInf1Dir2, altura_letras/2, -comprimento_letras, 0);
+    target_oCentroEsq1 := Offs (target_aCentroEsq1, 0, 0, offsetZ);
+    target_CentroDir2 := Offs (target_oCentroEsq1, 0, comprimento_letras, 0);
+
+! Movement
+
+    MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroDir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+
+
+
+
+
+
 
     
 ENDMODULE
 
+----------//------------
 
 ! Calculate intermediate points for curved trajectory
 VAR num num_points := 10;  ! Number of points for interpolation
