@@ -11,8 +11,10 @@ PROC draw( )
        IF "Classic" = text_FontType THEN 
 	        IF "A" = character OR "a" = character THEN
 	            ! Instructions to draw letter "A"
+                Letra_A;
 	        ELSEIF "B" = character OR "b" = character THEN
 	            ! Instructions to draw letter "B"
+                Letra_B;
 	        ELSEIF "C" = character OR "c" = character THEN
 	            ! Instructions to draw letter "C"
 	        ELSEIF "D" = character OR "d" = character THEN
@@ -61,7 +63,6 @@ PROC draw( )
 	            ! Instructions to draw letter "Y"
 	        ELSEIF "Z" = character OR "z" = character THEN
 	            ! Instructions to draw letter "Z"
-                
 	        ELSEIF " " = character THEN
 	            ! Instructions to draw letter " "
 	        ELSE

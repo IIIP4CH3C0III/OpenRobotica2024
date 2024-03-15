@@ -364,9 +364,11 @@ MODULE Menu
 
             IF 1 = answerPaperMenu THEN  
                 formatPageMenu ;
+                y_available := 0;
                 
             ELSEIF 2 = answerPaperMenu THEN                                                        
-                orientationPageMenu;   
+                orientationPageMenu;
+                y_available := 0;
                 
             ELSEIF 3 = answerPaperMenu THEN
                 marginsPageMenu ;
@@ -557,17 +559,21 @@ MODULE Menu
     !===================== Code - ImpressMenu ============================
 
     PROC printingPageMenu()        
-         VAR bool x := FALSE;
-         WHILE answerPrintingMenu <> 5 DO
-            ! Clear the console
-            TPErase;
+         VAR num x := 1;
+        WHILE answerPrintingMenu = 4 OR answerPrintingMenu = 0 DO
+           ! Clear the console
+           TPErase;
 
-            IF TRUE = x THEN
-    	        tpWriteReportSettingsTextMenu;
-    	        x := FALSE;
+           IF 1 = x THEN
+                TPWrite "Texto a ser impresso";
+                TPWrite userInputText;
+    	        x := 2;
+            ELSEIF 2 = X THEN
+	            tpWriteReportSettingsTextMenu;
+    	        x := 3;
             ELSE
-	            tpWriteReportSettingsPageMenu;
-    	        x := TRUE;
+                tpWriteReportSettingsPageMenu;
+    	        x := 1;
             ENDIF
         
             ! Options to change settings of the page

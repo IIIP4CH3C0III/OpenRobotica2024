@@ -8,8 +8,8 @@ MODULE Print
 		FOR i FROM 1 TO StrLen( userInputText ) DO
             character := StrPart( userInputText, i, 1);
             draw;
-            TPWrite NumToStr(coord_x_letter,0);
-            WaitTime(2);
+            !TPWrite NumToStr(coord_x_letter,0);
+            !WaitTime(2);
             !Calculate new point center
             IF automatic = TRUE THEN
                 coord_x_letter := coord_x_letter + letter_lenght_aut + text_SpaceLetters_aut;
@@ -17,6 +17,9 @@ MODULE Print
                 !!
             ENDIF
 		ENDFOR
-       WaitTime(10); 
+        
+        TPWrite "Impressão Feita";
+        MoveJ Default_position,v1000,fine,pen\WObj:=Workobject_Paper;
+       WaitTime(5); 
     ENDPROC
 ENDMODULE
