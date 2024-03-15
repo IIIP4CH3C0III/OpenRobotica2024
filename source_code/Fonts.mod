@@ -1,9 +1,68 @@
 MODULE Fonts
-    ! Definition of the standart size of the font
-    CONST num letterWidthUpperCaseNormalFont  := 1;
-    CONST num letterHeightUpperCaseNormalFont := 1;
-    CONST num letterWidthLowerCaseNormalFont  := 1;
-    CONST num letterHeightLowerCaseNormalFont := 1;
+
+    ! On the paper
+    
+    VAR robtarget target_oInf1Esq1;
+    VAR robtarget target_oInf1Esq2;
+    VAR robtarget target_oInf1Centro;
+    VAR robtarget target_oInf1Dir1;
+    VAR robtarget target_oInf1Dir2;
+
+    VAR robtarget target_oInf2Esq1;
+    VAR robtarget target_oInf2Esq2;
+    VAR robtarget target_oInf2Centro;
+    VAR robtarget target_oInf2Dir1;
+    VAR robtarget target_oInf2Dir2;
+
+    VAR robtarget target_oCentroEsq1;
+    VAR robtarget target_oCentroEsq2;
+    VAR robtarget target_oCentroCentro;
+    VAR robtarget target_oCentroDir1;
+    VAR robtarget target_oCentroDir2;
+
+    VAR robtarget target_oSup1Esq1;
+    VAR robtarget target_oSup1Esq2;
+    VAR robtarget target_oSup1Centro;
+    VAR robtarget target_oSup1Dir1;
+    VAR robtarget target_oSup1Dir2;
+
+    VAR robtarget target_oSup2Esq1;
+    VAR robtarget target_oSup2Esq2;
+    VAR robtarget target_oSup2Centro;
+    VAR robtarget target_oSup2Dir1;
+    VAR robtarget target_oSup2Dir2;
+
+    ! Above the paper
+
+    VAR robtarget target_aInf1Esq1;
+    VAR robtarget target_aInf1Esq2;
+    VAR robtarget target_aInf1Centro;
+    VAR robtarget target_aInf1Dir1;
+    VAR robtarget target_aInf1Dir2;
+
+    VAR robtarget target_aInf2Esq1;
+    VAR robtarget target_aInf2Esq2;
+    VAR robtarget target_aInf2Centro;
+    VAR robtarget target_aInf2Dir1;
+    VAR robtarget target_aInf2Dir2;
+
+    VAR robtarget target_aCentroEsq1;
+    VAR robtarget target_aCentroEsq2;
+    VAR robtarget target_aCentroCentro;
+    VAR robtarget target_aCentroDir1;
+    VAR robtarget target_aCentroDir2;
+
+    VAR robtarget target_aSup1Esq1;
+    VAR robtarget target_aSup1Esq2;
+    VAR robtarget target_aSup1Centro;
+    VAR robtarget target_aSup1Dir1;
+    VAR robtarget target_aSup1Dir2;
+
+    VAR robtarget target_aSup2Esq1;
+    VAR robtarget target_aSup2Esq2;
+    VAR robtarget target_aSup2Centro;
+    VAR robtarget target_aSup2Dir1;
+    VAR robtarget target_aSup2Dir2;
 
 PROC draw( )
     
@@ -63,9 +122,11 @@ PROC draw( )
 	            ! Instructions to draw letter "Y"
 	        ELSEIF "Z" = character OR "z" = character THEN
 	            ! Instructions to draw letter "Z"
+
 	        ELSEIF " " = character THEN
 	            ! Instructions to draw letter " "
 	        ELSE
+
 	        ENDIF
 	      ENDIF
     ENDPROC    
