@@ -101,8 +101,55 @@ PROC draw( )
 	            ! Instructions to draw letter "F"
 	        ELSEIF "G" = character OR "g" = character THEN
 	            ! Instructions to draw letter "G"
+
+			    target_aCentroCentro := Offs (target_aInf1Esq1, altura_letras/2, comprimento_letras/2, 0);
+			    target_oCentroCentro := Offs (target_aCentroCentro, 0, 0, offsetZ);
+			    target_CentroDir2 := Offs (target_oCentroCentro, 0, comprimento_letras/2, 0);
+			    target_Inf2Dir2 := Offs (target_CentroDir2, -altura_letras/5, 0, 0);
+ 			    target_Inf1Dir1 := Offs (target_Inf2Dir2, -altura_letras/5, -comprimento_letras/5, 0);
+			    target_Inf1Esq2 := Offs (target_Inf1Dir1, 0, -2*comprimento_letras/5, 0);
+			    target_Inf2Esq1 := Offs (target_Inf1Esq2, altura_letras/5, -comprimento_letras/5, 0);
+			    target_Sup2Esq1 := Offs (target_Inf2Esq1, 2*altura_letras/5, 0, 0);
+			    target_Sup1Esq2 := Offs (target_Sup2Esq1, altura_letras/5, comprimento_letras/5, 0);
+			    target_Sup1Dir1 := Offs (target_Sup1Esq2, 0, 2*comprimento_letras/5, 0);
+			    target_Sup2Dir2 := Offs (target_Sup1Dir1, -altura_letras/5, comprimento_letras/5, 0);
+    
+! Movement
+
+			    MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveL target_aCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveL target_oCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveL target_CentroDir2, v100, fine, pen\WObj:=Workobject_Paper;
+	   		    MoveL target_Inf2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+	   		    MoveC target_Inf1Dir1, v100, fine, pen\WObj:=Workobject_Paper; !preciso de outro target para o MoveC
+			    MoveL target_Inf1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+ 			    MoveC target_Inf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveL target_Sup2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveC target_Sup1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveL target_Sup1Dir1, v100, fine, pen\WObj:=Workobject_Paper;
+			    MoveC target_Sup2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+
 	        ELSEIF "H" = character OR "h" = character THEN
 	            ! Instructions to draw letter "H"
+
+    target_aCentroEsq1 := Offs (target_aInf1Dir2, altura_letras/2, -comprimento_letras, 0);
+    target_oCentroEsq1 := Offs (target_aCentroEsq1, 0, 0, offsetZ);
+    target_CentroDir2 := Offs (target_oCentroEsq1, 0, comprimento_letras, 0);
+
+! Movement
+
+    MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_oCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+    MoveL target_CentroDir2, v100, fine, pen\WObj:=Workobject_Paper;
+
+
 	        ELSEIF "I" = character OR "i" = character THEN
 	            ! Instructions to draw letter "I"
 	        ELSEIF "J" = character OR "j" = character THEN
@@ -113,141 +160,23 @@ PROC draw( )
 	            ! Instructions to draw letter "L"
 	        ELSEIF "M" = character OR "m" = character THEN
 	            ! Instructions to draw letter "M"
-                target_aCentroCentro := Offs( target_aInf1Esq1 , altura_letras/2 , comprimento_letras/2 , 0); 
-                target_oCentroCentro := Offs( target_oInf1Esq1 , altura_letras/2 , comprimento_letras/2 , 0); 
-
-		        ! Movement
-		        MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oCentroCentro, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-	            
 	        ELSEIF "N" = character OR "n" = character THEN
-		        ! Movement
-		        MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-
+	            ! Instructions to draw letter "N"
 	        ELSEIF "O" = character OR "o" = character THEN
 	            ! Instructions to draw letter "O"
-                target_aSup1Centro := Offs( target_aInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-                target_oSup1Centro := Offs( target_oInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-
-                target_aInf1Centro := Offs( target_aInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_oInf1Centro := Offs( target_oInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-
-                target_aCentroDir2 := Offs( target_aInf1Esq1 , altura_letras/2 , comprimento_letras , 0); 
-                target_oCentroDir2 := Offs( target_oInf1Esq1 , altura_letras/2 , comprimento_letras , 0); 
-
-                target_aCentroEsq1 := Offs( target_aInf1Esq1 , altura_letras/2 , 0 , 0); 
-                target_oCentroEsq1 := Offs( target_oInf1Esq1 , altura_letras/2 , 0 , 0); 
-
-		        ! Movement
-		        MoveJ target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oSup1Centro , target_oCentroEsq1 , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oInf1Centro , target_oCentroEsq1 , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
-
 	        ELSEIF "P" = character OR "p" = character THEN
 	            ! Instructions to draw letter "P"
-                target_aSup2Dir2 := Offs( target_aInf1Esq1 , altura_letras*3/4 , comprimento_letras, 0); 
-                target_oSup2Dir2 := Offs( target_oInf1Esq1 , altura_letras*3/4 , comprimento_letras, 0); 
-                
-                target_aCentroEsq1 := Offs( target_aInf1Esq1 , altura_letras/2 , 0, 0); 
-                target_oCentroEsq1 := Offs( target_oInf1Esq1 , altura_letras/2 , 0, 0); 
-
-                target_aCentroEsq2 := Offs( target_aInf1Esq1 , altura_letras/2 , comprimento_letras *1/4, 0); 
-                target_oCentroEsq2 := Offs( target_oInf1Esq1 , altura_letras/2 , comprimento_letras *1/4, 0); 
-
-                target_aSup1Esq2 := Offs( target_aInf1Esq1 , altura_letras , comprimento_letras *1/4, 0); 
-                target_oSup1Esq2 := Offs( target_oInf1Esq1 , altura_letras , comprimento_letras *1/4, 0); 
-
-		        ! Movement
-		        MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oSup2Dir2 , target_oCentroEsq2 , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
-                 
-	            
 	        ELSEIF "Q" = character OR "q" = character THEN
 	            ! Instructions to draw letter "Q"
-	            
 	        ELSEIF "R" = character OR "r" = character THEN
 	            ! Instructions to draw letter "R"
-                                
-
 	        ELSEIF "S" = character OR "s" = character THEN
 	            ! Instructions to draw letter "S"
-                target_aSup2Dir2 := Offs( target_aInf1Esq1 , altura_letras * 3/4 , comprimento_letras , 0);
-                target_oSup2Dir2 := Offs( target_oInf1Esq1 , altura_letras * 3/4 , comprimento_letras , 0);
-
-                target_aInf2Esq1 := Offs( target_aInf1Esq1 , altura_letras * 1/4 , 0 , 0);
-                target_oInf2Esq1 := Offs( target_oInf1Esq1 , altura_letras * 1/4 , 0 , 0);
-
-                target_aInf1Centro := Offs( target_aInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_oInf1Centro := Offs( target_oInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_aSup1Centro := Offs( target_aInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-                target_oSup1Centro := Offs( target_oInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-
-                target_aInf2Dir2 := Offs( target_aInf1Esq1 , altura_letras * 1/4 , comprimento_letras , 0); 
-                target_oInf2Dir2 := Offs( target_oInf1Esq1 , altura_letras * 1/4 , comprimento_letras , 0); 
-
-                target_aCentroCentro := Offs( target_aInf1Esq1 , altura_letras/2 , comprimento_letras/2 , 0); 
-                target_oCentroCentro := Offs( target_oInf1Esq1 , altura_letras/2 , comprimento_letras/2 , 0); 
-
-                target_aSup2Esq1 := Offs( target_aInf1Esq1 , altura_letras * 3/4 , 0 , 0);
-                target_oSup2Esq1 := Offs( target_oInf1Esq1 , altura_letras * 3/4 , 0 , 0);
-
-		        ! Movement
-		        MoveJ target_aSup2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup2Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oSup1Centro , target_oCentroCentro , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oInf2Dir2 , target_oInf2Esq1 , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aInf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-                
-
 	        ELSEIF "T" = character OR "t" = character THEN
 	            ! Instructions to draw letter "T"
-                target_aInf1Centro := Offs( target_aInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_oInf1Centro := Offs( target_oInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_aSup1Centro := Offs( target_aInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-                target_oSup1Centro := Offs( target_oInf1Esq1 , altura_letras , comprimento_letras/2 , 0); 
-
-		        ! Movement
-		        MoveJ target_aSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Centro, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf1Centro, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_aInf1Centro, v100, fine, pen\WObj:=Workobject_Paper;
-                
-
 	        ELSEIF "U" = character OR "u" = character THEN
 	            ! Instructions to draw letter "U"
-                target_aInf1Centro := Offs( target_aInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_oInf1Centro := Offs( target_oInf1Esq1 , 0 , comprimento_letras/2 , 0); 
-                target_aInf2Esq1 := Offs( target_aInf1Esq1 , altura_letras/4 , 0 , 0); 
-                target_oInf2Esq1 := Offs( target_oInf1Esq1 , altura_letras/4 , 0 , 0); 
-                target_aInf2Dir2 := Offs( target_aInf1Esq1 , altura_letras/4 , comprimento_letras , 0); 
-                target_oInf2Dir2 := Offs( target_oInf1Esq1 , altura_letras/4 , comprimento_letras , 0); 
-
-		        ! Movement
-		        MoveJ target_aSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oInf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveC target_oInf1Centro , target_oInf2Dir2 , v100, fine, pen\WObj:=Workobject_Paper;
-		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;	            
-		        MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;	            
+	            
 
 	        ELSEIF "V" = character OR "v" = character THEN
 	            ! Instructions to draw letter "V"
