@@ -21,6 +21,7 @@ MODULE Math
             \InitString:= "OPEN ROBOTICA");
     ENDPROC
     
+    
     PROC calculo_size()
         !Calculo de caracteres
         lenght_char_impress := StrLen(userInputText);
