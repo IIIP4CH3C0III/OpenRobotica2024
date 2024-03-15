@@ -85,18 +85,16 @@ PROC draw( )
        target_aInf1Dir2   := Offs(target_aInf1Esq1, 0 , comprimento_letras , 0); 
        target_oInf1Dir2   := Offs(target_oInf1Esq1, 0 , comprimento_letras , 0); 
 
-
-       target_aInf1Esq1   := Offs(target_aInf1Esq1, altura_letras / 4 , 0 , 0); 
-       target_oInf1Esq1   := Offs(target_oInf1Esq1, altura_letras / 4 , 0 , 0); 
-       target_aInf1Esq2   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras / 4 , 0); 
-       target_oInf1Esq2   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras / 4 , 0); 
-       target_aInf1Centro := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras / 2 , 0); 
-       target_oInf1Centro := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras / 2 , 0); 
-       target_aInf1Dir1   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras * 3 / 4 , 0); 
-       target_oInf1Dir1   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras * 3 / 4 , 0); 
-       target_aInf1Dir2   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras , 0); 
-       target_oInf1Dir2   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras , 0); 
-
+       target_aInf2Esq1   := Offs(target_aInf1Esq1, altura_letras / 4 , 0 , 0); 
+       target_oInf2Esq1   := Offs(target_oInf1Esq1, altura_letras / 4 , 0 , 0); 
+       target_aInf2Esq2   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras / 4 , 0); 
+       target_oInf2Esq2   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras / 4 , 0); 
+       target_aInf2Centro := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras / 2 , 0); 
+       target_oInf2Centro := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras / 2 , 0); 
+       target_aInf2Dir1   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras * 3 / 4 , 0); 
+       target_oInf2Dir1   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras * 3 / 4 , 0); 
+       target_aInf2Dir2   := Offs(target_aInf1Esq1, altura_letras / 4 , comprimento_letras , 0); 
+       target_oInf2Dir2   := Offs(target_oInf1Esq1, altura_letras / 4 , comprimento_letras , 0); 
 
        target_aCentroEsq1   := Offs(target_aInf1Esq1, altura_letras / 2 , 0 , 0); 
        target_oCentroEsq1   := Offs(target_oInf1Esq1, altura_letras / 2 , 0 , 0); 
