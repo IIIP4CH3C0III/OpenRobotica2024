@@ -5,7 +5,7 @@ MODULE Print
         TPWrite "A imprimir  ...";
 
 		FOR i FROM 1 TO StrLen( userInputText ) DO
-            charPrint := StrPart( userInputText, i, 1);
+            character := StrPart( userInputText, i, 1);
             draw;
 		ENDFOR        
     ENDPROC

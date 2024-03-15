@@ -15,7 +15,7 @@ MODULE Menu
 
     ! Variable that stores the text input
     VAR string userInputText ; 
-    VAR string charPrint;
+    VAR string character;
 
     ! Dimensions of the format papers (mm)
     CONST num a3Lenght := 297; 
@@ -530,8 +530,10 @@ MODULE Menu
 
             IF TRUE = x THEN
     	        tpWriteReportSettingsTextMenu;
+    	        x := FALSE;
             ELSE
 	            tpWriteReportSettingsPageMenu;
+    	        x := TRUE;
             ENDIF
         
             ! Options to change settings of the page
