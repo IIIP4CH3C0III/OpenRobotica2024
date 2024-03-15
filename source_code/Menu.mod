@@ -150,6 +150,7 @@ MODULE Menu
                                 
             ELSEIF 2 = answersettingMenu THEN                                                        
                 TPReadNum text_SizePT, "Qual é o tamanho da letra? (pt) (default = 12)";
+                !TODO convert pt to mm
                 
             ELSEIF 3 = answersettingMenu THEN
                 fontColorPageMenu ;
@@ -400,18 +401,36 @@ MODULE Menu
 
         IF 1 = answerPaperMenu2 THEN  
             paper_size := "A3" ;
-            paper_Width := a3Width;
-            paper_Length := a3Lenght;
+
+            IF "Vertical" = paper_orientation THEN
+                 paper_Width := a3Lenght;
+                 paper_Length := a3Width;
+            ELSE
+                 paper_Width := a3Width;
+                 paper_Length := a3Lenght;
+            ENDIF
         
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
             paper_size := "A4" ;
-            paper_Width := a4Width;
-            paper_Length := a4Lenght; 
+
+            IF "Vertical" = paper_orientation THEN
+                 paper_Width := a4Lenght;
+                 paper_Length := a4Width;
+            ELSE
+                 paper_Width := a4Width;
+                 paper_Length := a4Lenght;
+            ENDIF
             
         ELSEIF 3 = answerPaperMenu2 THEN
             paper_size := "A5" ;
-            paper_Width := a5Width;
-            paper_Length := a5Lenght;
+
+            IF "Vertical" = paper_orientation THEN
+                 paper_Width := a5Lenght;
+                 paper_Length := a5Width;
+            ELSE
+                 paper_Width := a5Width;
+                 paper_Length := a5Lenght;
+            ENDIF
         
         ELSEIF 4 = answerPaperMenu2 THEN
             ! nothing for now (fuction enable)

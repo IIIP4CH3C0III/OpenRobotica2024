@@ -20,40 +20,13 @@ MODULE Math
     ENDPROC
     
     PROC calculo_size()
-        !Tamanho da folha
-        IF paper_orientation = "Horizontal" THEN 
-            IF paper_size = "A3" THEN
-               paper_Length := a3width;
-               paper_Width  := a3lenght;
-            ELSEIF paper_size = "A4" THEN
-                paper_Length := a4width;
-                paper_Width  := a4lenght;
-            ELSEIF paper_size = "A5" THEN
-                paper_Length := a5width;
-                paper_Width  := a5lenght;
-            ELSE
-            ENDIF
-            
-        ELSE                                !Orienta��o Horizontal
-            IF paper_size = "A3" THEN
-               paper_Length := a3lenght;
-               paper_Width  := a3width;
-            ELSEIF paper_size = "A4" THEN
-                paper_Length := a4lenght;
-                paper_Width  := a4width;
-            ELSEIF paper_size = "A5" THEN
-                paper_Length := a5lenght;
-                paper_Width  := a5width;
-            ELSE
-            ENDIF 
-        ENDIF  
-        
         !Calculo de caracteres
         lenght_char_impress := StrLen(char_impress);
         
         !Calculo estimado para cada letra
         space_free := paper_Length - paper_LeftMargin - paper_RightMargin;
-        
+
+        ! TODO text_SpaceLetters * CONST
         letter_lenght_aut := (space_free - ((lenght_char_impress - 1) * text_SpaceLetters)) DIV lenght_char_impress;
         
     ENDPROC
