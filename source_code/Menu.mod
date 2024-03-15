@@ -27,7 +27,7 @@ MODULE Menu
 
     ! Initialize the paper characteristics
     VAR string paper_size := "A4";
-    VAR string paper_orientation := "Horizontal";
+    VAR string paper_orientation := "Vertical";
     VAR string paper_alignment := "Esquerda";
     VAR num paper_TopMargin := 20;
     VAR num paper_BottomMargin := 20;
@@ -48,6 +48,19 @@ MODULE Menu
     VAR num letter_lenght := 5;
     VAR num letter_width := 10;
     
+    VAR num paragraph_write := 0;
+    
+    !Position text
+    VAR num x_available;
+    VAR num y_available := 0;
+    VAR num coord_x_letter;
+    VAR num coord_y_letter;
+    
+    VAR bool automatic := FALSE;
+    
+    VAR num altura_letras;
+    VAR num comprimento_letras;
+    
     ! ==================== Code - default ========================= !
 
     ! Process for the inicialization program
@@ -55,8 +68,10 @@ MODULE Menu
         ! Clear console
         TPErase;         
 
+        MoveJ Default_position,v1000,fine,pen\WObj:=Workobject_Paper;
+        
         ! JumpHome; !TODO
-        TPWrite "O robot est√° pronto a ser operado.";
+        TPWrite "O robot est· pronto a ser operado.";
  
         WaitTime(1);
     ENDPROC
@@ -68,14 +83,14 @@ MODULE Menu
         TPErase; 
         
         ! Welcome page.
-        TPWrite "Plotter & Open Rob√≥tica";
+        TPWrite "Plotter & Open RobÛtica";
         
         ! Options of the menu
         TPReadFK answerInitMenu , 
                  stEmpty , 
                  "Escrever Manualmente" , 
-                 "Defini√ß√µes texto" , 
-                 "Defini√ß√µes folha" ,  
+                 "DefiniÁıes texto" , 
+                 "DefiniÁıes folha" ,  
                  "Imprimir",  
                  "Debug";                                                                                            
                  
@@ -142,14 +157,14 @@ MODULE Menu
                      "Fonte", 
                      "Tamanho (pt)", 
                      "Cor", 
-                     "P√°gina seguinte", 
+                     "P·gina seguinte", 
                      "Voltar";
             
             IF 1 = answersettingMenu THEN  
                 fontTypePageMenu ;
                                 
             ELSEIF 2 = answersettingMenu THEN                                                        
-                TPReadNum text_SizePT, "Qual √© o tamanho da letra? (pt) (default = 12)";
+                TPReadNum text_SizePT, "Qual È o tamanho da letra? (pt) (default = 12)";
                 !TODO convert pt to mm
                 
             ELSEIF 3 = answersettingMenu THEN
@@ -177,20 +192,20 @@ MODULE Menu
             ! Options to change settings of the page
             TPReadFK answerSettingMenu, 
                      stEmpty , 
-                     "Rota√ß√£o", 
-                     "Espa√ßamento entre letras", 
-                     "Espa√ßamento entre paragr√°fos", 
-                     "P√°gina seguinte", 
+                     "RotaÁ„o", 
+                     "EspaÁamento entre letras", 
+                     "EspaÁamento entre paragr·fos", 
+                     "P·gina seguinte", 
                      "Voltar";
             
             IF 1 = answersettingMenu THEN  
-                TPReadNum text_Rotation, "Qual √© a rota√ß√£o pretendida? (graus)";
+                TPReadNum text_Rotation, "Qual È a rotaÁ„o pretendida? (graus)";
                                 
             ELSEIF 2 = answersettingMenu THEN                                                        
-                TPReadNum text_SpaceLetters, "Qual √© o espa√ßamento entre letras? (mm) (default = 2)";
+                TPReadNum text_SpaceLetters, "Qual È o espaÁamento entre letras? (mm) (default = 2)";
                 
             ELSEIF 3 = answersettingMenu THEN
-                TPReadNum text_SpaceParag, "Qual √© o espa√ßamento entre paragr√°fos? (mm) (default = 5)";
+                TPReadNum text_SpaceParag, "Qual È o espaÁamento entre paragr·fos? (mm) (default = 5)";
                 
             ELSEIF 4 = answersettingMenu THEN
                 answersettingMenu := 0;
@@ -214,9 +229,9 @@ MODULE Menu
             TPReadFK answerSettingMenu, 
                      stEmpty , 
                      "Negrito", 
-                     "It√°lico", 
+                     "It·lico", 
                      "Sublinhado", 
-                     "P√°gina seguinte", 
+                     "P·gina seguinte", 
                      "Voltar";
             
             IF 1 = answersettingMenu THEN  
@@ -243,7 +258,7 @@ MODULE Menu
         ! Clear the console
         TPErase;
        
-        TPWrite("Defini√ß√µes de Texto:");
+        TPWrite("DefiniÁıes de Texto:");
                       
         ! Display font type
         TPWrite("Fonte de Letra: " + text_FontType ); 
@@ -255,13 +270,13 @@ MODULE Menu
         TPWrite "Cor de Letra: " + text_Color;
                 
         ! Display letter rotation
-        TPWrite "Rota√ß√£o do texto: " + NumToStr( text_Rotation, 0 ) + " graus";
+        TPWrite "RotaÁ„o do texto: " + NumToStr( text_Rotation, 0 ) + " graus";
 
         ! Display space between letters
-        TPWrite "Espa√ßo entre letras: " + NumToStr( text_SpaceLetters, 0 ) + " mm";
+        TPWrite "EspaÁo entre letras: " + NumToStr( text_SpaceLetters, 0 ) + " mm";
 
         ! Display space between paragraphs
-        TPWrite "Espa√ßo entre par√°grafos: " + NumToStr( text_SpaceParag, 0 ) + " mm";
+        TPWrite "EspaÁo entre par·grafos: " + NumToStr( text_SpaceParag, 0 ) + " mm";
     ENDPROC
 
     PROC fontTypePageMenu( )
@@ -342,7 +357,7 @@ MODULE Menu
             TPReadFK answerPaperMenu, 
                      stEmpty , 
                      "Formato", 
-                     "Orienta√ß√£o", 
+                     "OrientaÁ„o", 
                      "Margens", 
                      "Alinhamento", 
                      "Voltar";
@@ -367,17 +382,17 @@ MODULE Menu
     ENDPROC
 
     PROC tpWriteReportSettingsPageMenu()
-        TPWrite("Defini√ß√µes de p√°gina:");
+        TPWrite("DefiniÁıes de p·gina:");
 
         ! Display paper size
         TPWrite "Formato da folha: " + paper_size + " ( " +  NumToStr(paper_Width,0) + " mm, " +  NumToStr(paper_Length,0) + " mm)";
 
         ! Display paper orientation
-        TPWrite "Orienta√ß√£o da folha: " + paper_Orientation;
+        TPWrite "OrientaÁ„o da folha: " + paper_Orientation;
 
         ! Display paper margins
         TPWrite "Margens da folha: ";
-        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabe√ßalho)," + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodap√©)," ;
+        TPWrite " " + NumToStr( paper_TopMargin, 0 ) + " (mm) (cabeÁalho)," + NumToStr( paper_BottomMargin ,0 ) + " (mm) (rodapÈ)," ;
         TPWrite " " + NumToStr( paper_LeftMargin, 0 ) + " (mm) (esquerda)," + NumToStr( paper_RightMargin , 0 ) + " (mm) (direita)" ;
 
         ! Display text alignment
@@ -481,8 +496,8 @@ MODULE Menu
         ! Options to change orientation
         TPReadFK answerPaperMenu2, 
                  stEmpty , 
-                 "Cabe√ßalho" , 
-                 "Rodap√©" , 
+                 "CabeÁalho" , 
+                 "RodapÈ" , 
                  "Direita" , 
                  "Esquerda" , 
                  "Voltar" ;
@@ -490,16 +505,16 @@ MODULE Menu
         ! TODO does nothing at the moment 
         
         IF 1 = answerPaperMenu2 THEN  
-            TPReadNum paper_TopMargin, "Qual √© o valor da margem do cabe√ßalho? (mm)";
+            TPReadNum paper_TopMargin, "Qual È o valor da margem do cabeÁalho? (mm)";
             
         ELSEIF 2 = answerPaperMenu2 THEN                                                        
-            TPReadNum paper_BottomMargin, "Qual √© o valor da margem do rodap√©? (mm)";
+            TPReadNum paper_BottomMargin, "Qual È o valor da margem do rodapÈ? (mm)";
             
         ELSEIF 3 = answerPaperMenu2 THEN
-            TPReadNum paper_RightMargin, "Qual √© o valor da margem direita? (mm)";
+            TPReadNum paper_RightMargin, "Qual È o valor da margem direita? (mm)";
             
         ELSEIF 4 = answerPaperMenu2 THEN
-            TPReadNum paper_LeftMargin, "Qual √© o valor da margem esquerda? (mm)";
+            TPReadNum paper_LeftMargin, "Qual È o valor da margem esquerda? (mm)";
             
         ELSEIF 5 = answerPaperMenu2 THEN
             answerPaperMenu2 := 0 ;
@@ -558,14 +573,14 @@ MODULE Menu
             ! Options to change settings of the page
             TPReadFK answerPrintingMenu, 
                      stEmpty , 
-                     "Autom√°tico", 
+                     "Autom·tico", 
                      "Manual", 
                      "Ficheiro", 
                      "Scroll", 
                      "Voltar";
             
             IF 1 = answerPrintingMenu THEN  
-                !automaticPrinting;
+                automaticPrinting;
                                 
             ELSEIF 2 = answerPrintingMenu THEN                                                        
                 !manualPriting;
@@ -581,6 +596,24 @@ MODULE Menu
         answerPrintingMenu := 0;
     ENDPROC
     
+    
+    PROC automaticPrinting()
+        calculo_size;
+        
+        !calcula a origem do ponto
+        calculate_origin;
+        
+        altura_letras := letter_widht_aut;
+        comprimento_letras := letter_lenght_aut;
+        
+        automatic := TRUE;
+        !impres„o
+        impress_mecanism;
+        
+        automatic := FALSE;
+        
+    ENDPROC
+    
     ! ==================== Code - debugMenu ==================== !
 
     PROC debugMenu( )
@@ -588,6 +621,20 @@ MODULE Menu
         TPErase;
     
         !TPRead   
+    ENDPROC
+    PROC start_default()
+        WaitTime 3;
+    ENDPROC
+    PROC principal_menu()
+        menu_text;
+        menu_paper;
+        impressmenu;
+    ENDPROC
+    PROC menu_text()
+
+    ENDPROC
+    PROC menu_paper()
+
     ENDPROC
     
     

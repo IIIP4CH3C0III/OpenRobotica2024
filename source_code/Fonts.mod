@@ -6,6 +6,8 @@ MODULE Fonts
     CONST num letterHeightLowerCaseNormalFont := 1;
 
 PROC draw( )
+    
+       TPWrite "Caracter a Imprimir: " + character;
        IF "Classic" = text_FontType THEN 
 	        IF "A" = character OR "a" = character THEN
 	            ! Instructions to draw letter "A"
