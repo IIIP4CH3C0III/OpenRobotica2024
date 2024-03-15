@@ -40,6 +40,10 @@ MODULE Math
         !Refazer
         letter_lenght_aut := (space_free - ((lenght_char_impress - 1) * text_SpaceLetters_aut)) DIV lenght_char_impress;
         letter_widht_aut := letter_lenght_aut * 2;
+        
+        IF letter_widht_aut > ( paper_Width - paper_TopMargin - paper_BottomMargin) THEN
+            letter_widht_aut := paper_Width - paper_TopMargin - paper_BottomMargin;
+        ENDIF
     ENDPROC
     
     PROC calculate_origin()
