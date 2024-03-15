@@ -157,7 +157,19 @@ PROC draw( )
 
 	        ELSEIF "P" = character OR "p" = character THEN
 	            ! Instructions to draw letter "P"
+                target_aSup2Dir1 := Offs( target_aInf1Esq1 , altura_letras*3/4 , comprimento_letras*3/4, 0); 
+                target_oSup2Dir1 := Offs( target_oInf1Esq1 , altura_letras*3/4 , comprimento_letras*3/4 , 0); 
+                
+                target_aCentroEsq1 := Offs( target_aInf1Esq1 , altura_letras/2 , 0, 0); 
+                target_oCentroEsq1 := Offs( target_oInf1Esq1 , altura_letras/2 , 0, 0); 
 
+		        ! Movement
+		        MoveJ target_aInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveC target_oSup2Dir1 , target_oCentroEsq1 , v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_aCentroEsq1, v100, fine, pen\WObj:=Workobject_Paper;
+                 
 	            
 	        ELSEIF "Q" = character OR "q" = character THEN
 	            ! Instructions to draw letter "Q"
