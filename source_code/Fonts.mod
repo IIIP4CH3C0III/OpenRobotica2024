@@ -129,7 +129,20 @@ PROC draw( )
 	            ! Instructions to draw letter "T"
 	        ELSEIF "U" = character OR "u" = character THEN
 	            ! Instructions to draw letter "U"
-	            
+                target_aInf1Centro := Offs( target_aInf1Esq1 , 0 , comprimento_letras/2 , 0); 
+                target_oInf1Centro := Offs( target_oInf1Esq1 , 0 , comprimento_letras/2 , 0); 
+                target_aInf2Esq1 := Offs( target_aInf1Esq1 , altura_letras/4 , 0 , 0); 
+                target_oInf2Esq1 := Offs( target_oInf1Esq1 , altura_letras/4 , 0 , 0); 
+                target_aInf2Dir2 := Offs( target_aInf1Esq1 , altura_letras/4 , comprimento_letras , 0); 
+                target_oInf2Dir2 := Offs( target_oInf1Esq1 , altura_letras/4 , comprimento_letras , 0); 
+
+		        ! Movement
+		        MoveJ target_aSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oInf2Esq1, v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveC target_oInf1Centro , target_oInf2Dir2 , v100, fine, pen\WObj:=Workobject_Paper;
+		        MoveL target_oSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;	            
+		        MoveL target_aSup1Dir2, v100, fine, pen\WObj:=Workobject_Paper;	            
 
 	        ELSEIF "V" = character OR "v" = character THEN
 	            ! Instructions to draw letter "V"
