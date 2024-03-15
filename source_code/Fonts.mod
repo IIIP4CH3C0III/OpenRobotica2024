@@ -61,6 +61,7 @@ PROC draw( )
 	            ! Instructions to draw letter "Y"
 	        ELSEIF "Z" = character OR "z" = character THEN
 	            ! Instructions to draw letter "Z"
+                
 	        ELSEIF " " = character THEN
 	            ! Instructions to draw letter " "
 	        ELSE
