@@ -14,7 +14,7 @@ MODULE Math
     VAR num letterWidthAutomated;
     VAR num text_SpaceLettersAutomated;
 
-    CONST num factorSpaceBetweenLetters := 2;
+    CONST num factorSpaceBetweenLetters := 5;
     CONST num factorHightLetter := 2;
 
     ! Position text
@@ -26,7 +26,7 @@ MODULE Math
     PROC write_string()
         TPWrite "Insira a(s) palavra(s) pretendida(s) para imprimir.";
         userInputText := UIAlphaEntry(
-            \Header:= "Impress�o",
+            \Header:= "Impressão",
             \Message:= ""
             \Icon:=iconInfo
             \InitString:= "OPEN ROBOTICA");
@@ -39,7 +39,9 @@ MODULE Math
 
         ! Garentee the user actually inserts a text
         IF 0 = userInputTextLenght THEN
-              TPWrite "Error : Necessário texto para poder imprimir."
+              TPWrite "Error : Necessário texto para poder imprimir.";
+              errorA := TRUE;
+              RETURN ;
         ENDIF
         
         ! Get the size of the page
@@ -49,11 +51,13 @@ MODULE Math
         ! Calculate the width of the text acordingly to fit the page line
         letterWidthAutomated := ( workSpaceWidth - ( ( userInputTextLenght - 1 ) * text_SpaceLetters ) ) DIV userInputTextLenght ;
         
-        ! Calculate the space required between letters 
-        text_SpaceLettersAutomated := text_SpaceLetters * letterWidthAutomated DIV factorSpaceBetweenLetters ;
-
-        ! Recalculate the lenght of the text acordingly to fit the page line considering the new spacement
-        letterWidthAutomated := ( workSpaceWidth - ( ( userInputTextLenght - 1 ) * text_SpaceLettersAutomated ) ) DIV userInputTextLenght ;
+        FOR I FROM 1 TO 10 DO
+            ! Calculate the space required between letters 
+            text_SpaceLettersAutomated := text_SpaceLetters + letterWidthAutomated DIV factorSpaceBetweenLetters ;
+    
+            ! Recalculate the lenght of the text acordingly to fit the page line considering the new spacement
+            letterWidthAutomated := ( workSpaceWidth - ( ( userInputTextLenght - 1 ) * text_SpaceLettersAutomated ) ) DIV userInputTextLenght ;
+        ENDFOR 
 
         ! Garantee a minimum space between
         IF 0 = text_SpaceLettersAutomated THEN
@@ -69,7 +73,6 @@ MODULE Math
     ENDPROC
     
     PROC calculateOrigin( ) 
-
         IF FALSE = automatic THEN
 	        IF "Esquerda" = paper_alignment THEN
 	        	xAvailable := paper_LeftMargin;
@@ -80,25 +83,22 @@ MODULE Math
 	        ELSEIF "Justificado" = paper_alignment THEN
 	        	xAvailable := paper_LeftMargin;
 	        ENDIF          
-
-	        IF 0 = yAvailable THEN
-	            yAvailable := paper_Length - paper_TopMargin ; 
-	        ELSE
-	            yAvailable := coord_y_letter - letterLenghtAutomated - text_SpaceLettersAutomated ;
-	            !Condition to out page
-	            IF 0 > ( yAvailable - letterLenghtAutomated ) THEN 
-                     TPWrite "Error : Fora de página";
-                     RETURN FALSE;
-	            ENDIF 
-	        ENDIF
-
         ELSEIF TRUE = automatic THEN
 	       	xAvailable := paper_LeftMargin;
-        ENDIF
+	        IF 0 = yAvailable THEN
+	            yAvailable := paper_Length - paper_TopMargin - letterLenghtAutomated; 
+	        ELSE
+	            yAvailable := coord_y_letter - letterLenghtAutomated - text_SpaceParag ;
+	            !Condition to out page
+	            IF 0 > yAvailable THEN 
+                     TPWrite "Error : Fora de página";
+                     errorA := TRUE;
+                     RETURN;
+	            ENDIF 
+	        ENDIF
+        ENDIF        
         
-        
-        coord_x_letter := x_available;
-        coord_y_letter := y_available - letter_widht_aut;
-
+        coord_x_letter := xAvailable;
+        coord_y_letter := yAvailable;
     ENDPROC    
 ENDMODULE
